@@ -625,3 +625,99 @@ function longestConsec(strarr, k) {
 }
 console.log(longestConsec(["zone", "abigail", "theta", "form", "libe", "zas"], 2))
 console.log(longestConsec(["wlwsasphmxx","owiaxujylentrklctozmymu","wpgozvxxiu"], 2))
+console.log('----------------------------------------------------')
+
+
+// If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+// Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
+
+// Note: If the number is a multiple of both 3 and 5, only count it once.
+
+function solution(number){
+  let multiples = [];
+  for(let i = 1; i < number; i++){
+    if(i % 5 == 0 && i % 3 == 0){
+      multiples.push(i);
+    } else if (i % 5 == 0){
+      multiples.push(i)
+    } else if (i % 3 == 0){
+      multiples.push(i)
+    }
+  }
+  let sum = multiples.reduce((a,b) => {
+    return a + b;
+  }, 0)
+  return sum;
+  
+}
+
+console.log(solution(100))
+console.log('----------------------------------------------------')
+
+// You probably know the "like" system from Facebook and other pages. People can "like" blog posts, pictures or other items. 
+// We want to create the text that should be displayed next to such an item.
+
+// Implement the function which takes an array containing the names of people that like an item. It must return the display text as shown in the examples:
+
+// []                                -->  "no one likes this"
+// ["Peter"]                         -->  "Peter likes this"
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+// Note: For 4 or more names, the number in "and 2 others" simply increases.
+function likes(names) {
+  let message = '';
+  
+  if(names.length === 0){
+    message = "no one likes this"
+  } else if(names.length === 1){
+    message = names[0] + " likes this"
+  } else if (names.length === 2){
+    message = names[0] + " and " + names[1] + " like this"
+  } else if (names.length === 3){
+    message = names[0] + ", " + names[1] + " and " + names[2] + " like this"
+  } else if (names.length > 3){
+    message = names[0] + ", " + names[1] + " and " + (names.length - 2) + " others like this"
+  }
+  
+  return message
+}
+console.log(likes(["Max", "John"]))
+console.log('----------------------------------------------------')
+
+// Given an array of integers, find the one that appears an odd number of times.
+
+// There will always be only one integer that appears an odd number of times.
+
+// Examples
+// [7] should return 7, because it occurs 1 time (which is odd).
+// [0] should return 0, because it occurs 1 time (which is odd).
+// [1,1,2] should return 2, because it occurs 1 time (which is odd).
+// [0,1,0,1,0] should return 0, because it occurs 3 times (which is odd).
+// [1,2,2,3,3,3,4,3,3,3,2,2,1] should return 4, because it appears 1 time (which is odd).
+
+function findOdd(A) {
+  let counts = {};
+
+  A.forEach((num) => {
+    if (counts[num]) {
+      counts[num]++;
+    } else {
+      counts[num] = 1;
+    }
+  });
+
+  let result = -1; 
+
+  for (const [num, count] of Object.entries(counts)) {
+    if (count % 2 !== 0) {
+      result = parseInt(num);
+      break;
+    }
+  }
+
+  return result;
+}
+
+console.log(findOdd([1, 1, 2, -2, 5, 2, 4, -2, 5]));
