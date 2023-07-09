@@ -721,3 +721,82 @@ function findOdd(A) {
 }
 
 console.log(findOdd([1, 1, 2, -2, 5, 2, 4, -2, 5]));
+console.log('----------------------------------------------------')
+
+// Given n, take the sum of the digits of n. If that value has more than one digit, continue reducing in this way until a single-digit number is produced. The input will be a non-negative integer.
+
+// Examples
+//     16  -->  1 + 6 = 7
+//    942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+// 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+// 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+function digitalRoot(n) {
+  let addSumNumbers = n;
+
+  while (addSumNumbers > 9) {
+    const numbers = addSumNumbers.toString().split('').map(Number);
+    addSumNumbers = numbers.reduce((a, b) => {
+      return a + b;
+    });
+  }
+  return addSumNumbers;
+}
+console.log(digitalRoot(16))
+console.log(digitalRoot(942))
+console.log(digitalRoot(132189))
+console.log(digitalRoot(927074))
+console.log(digitalRoot(10))
+console.log('----------------------------------------------------')
+
+// Your goal in this kata is to implement a difference function, which subtracts one list from another and returns the result.
+
+// It should remove all values from list a, which are present in list b keeping their order.
+
+// arrayDiff([1,2],[1]) == [2]
+// If a value is present in b, all of its occurrences must be removed from the other:
+
+// arrayDiff([1,2,2,2,3],[2]) == [1,3]
+function arrayDiff(a, b) {
+  
+  
+  const result = a.filter((value) => !b.includes(value));
+  
+  return result;
+}
+
+console.log(arrayDiff([1,2], [1]));
+console.log(arrayDiff([1,2,2], [1]))
+console.log(arrayDiff([1,2,2], [2]));
+console.log(arrayDiff([1,2,2], []));
+console.log(arrayDiff([], [1,2]));
+console.log(arrayDiff([1,2,3], [1,2]))
+
+console.log('----------------------------------------------------')
+
+// Write a function that takes in a string of one or more words, and returns the same string, 
+// but with all five or more letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces. 
+// Spaces will be included only when more than one word is present.
+
+// Examples:
+
+// spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" 
+// spinWords( "This is a test") => returns "This is a test" 
+// spinWords( "This is another test" )=> returns "This is rehtona test"
+
+function spinWords(string) {
+  const hello = string.split(' ');
+  
+  for (let i = 0; i < hello.length; i++) {
+    if (hello[i].length >= 5) {
+      hello[i] = hello[i].split('').reverse().join('');
+    }
+  }
+  const sentence = hello.join(' ');
+
+  return sentence;
+}
+
+console.log(spinWords("Seriously this is the last one"))
+console.log(spinWords("Just kidding there is still one more"))
+console.log(spinWords("You are almost to the last test"))
+console.log(spinWords("This is another test"))
