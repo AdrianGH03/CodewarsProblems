@@ -858,3 +858,48 @@ function duplicateCount(text){
   console.log(duplicateCount("Indivisibility"))//1
   console.log(duplicateCount("Indivisibilities"))// 2
 
+  console.log('----------------------------------------------------')
+
+function findOutlier(integers){
+  let evenCount = 0;
+  let oddCount = 0;
+  let evenNumber, oddNumber;
+
+  for (let i = 0; i < integers.length; i++) {
+    if (integers[i] % 2 === 0) {
+      evenCount++;
+      evenNumber = integers[i];
+    } else {
+      oddCount++;
+      oddNumber = integers[i];
+    }
+
+    // Return the outlier if found
+    if (evenCount > 1 && oddCount === 1) {
+      return oddNumber;
+    } else if (oddCount > 1 && evenCount === 1) {
+      return evenNumber;
+    }
+  }
+}
+console.log(findOutlier([1,2,3]))
+console.log('----------------------------------------------------')
+
+function alphabetPosition(text) {
+  const alphabet = Array.from("abcdefghijklmnopqrstuvwxyz");
+  const textNew = text.toLowerCase().split("");
+  const hello = [];
+
+  for (let i = 0; i < textNew.length; i++) {
+    const element = textNew[i];
+    const index = alphabet.indexOf(element);
+
+    if (index !== -1) {
+      hello.push(index + 1);
+    }
+  }
+
+  return hello.join(" ");
+}
+console.log(alphabetPosition("Hello"))
+console.log(alphabetPosition("The sunset sets at twelve o' clock."))
