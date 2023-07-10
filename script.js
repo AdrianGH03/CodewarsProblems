@@ -800,3 +800,61 @@ console.log(spinWords("Seriously this is the last one"))
 console.log(spinWords("Just kidding there is still one more"))
 console.log(spinWords("You are almost to the last test"))
 console.log(spinWords("This is another test"))
+
+console.log('----------------------------------------------------')
+var countBits = function(n) {
+  return n.toString(2).split('').filter((value) => value != 0).length;
+};
+console.log(countBits(0))
+console.log(countBits(4))
+console.log(countBits(7))
+console.log(countBits(9))
+console.log(countBits(10))
+
+console.log('----------------------------------------------------')
+
+// Count the number of Duplicates
+// Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits 
+// that occur more than once in the input string. The input string can be assumed to contain only 
+// alphabets (both uppercase and lowercase) and numeric digits.
+
+// Example
+// "abcde" -> 0 # no characters repeats more than once
+// "aabbcde" -> 2 # 'a' and 'b'
+// "aabBcde" -> 2 # 'a' occurs twice and 'b' twice (`b` and `B`)
+// "indivisibility" -> 1 # 'i' occurs six times
+// "Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
+// "aA11" -> 2 # 'a' and '1'
+// "ABBA" -> 2 # 'A' and 'B' each occur twi
+function duplicateCount(text){
+  const textLower = text.toLowerCase()
+  const array = textLower.split('');
+  
+  let duplicates = [];
+  let circles = [];
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] === array[j] && !duplicates.includes(array[j])) {
+        duplicates.push(array[j]);
+      }
+    }
+  }
+  for(let i = 0; i < array.length; i++){
+    if(duplicates.includes(array[i])){
+      circles.push(")")
+    } else if (!duplicates.includes(array[i])){
+      circles.push("(")
+    }
+  }
+
+  return circles.join("");
+  
+}
+  console.log(duplicateCount("")); //0
+  console.log(duplicateCount("abcde"));//0
+  console.log(duplicateCount("aabbcde"));//2
+  console.log(duplicateCount("aabBcde"));//2
+  console.log(duplicateCount("Indivisibility"))//1
+  console.log(duplicateCount("Indivisibilities"))// 2
+
