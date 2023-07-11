@@ -903,3 +903,103 @@ function alphabetPosition(text) {
 }
 console.log(alphabetPosition("Hello"))
 console.log(alphabetPosition("The sunset sets at twelve o' clock."))
+console.log('----------------------------------------------------')
+
+// You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, 
+// so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones 
+// -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']).
+//  You always walk only a single block for each letter (direction) and you know it takes you one minute to traverse one city block, so create 
+//  a function that will return true if the walk the app gives you will take you exactly 
+// ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise.
+
+function isValidWalk(walk) {
+  if(walk.length != 10){
+    return false;
+  }
+  let vertCounter = 0;
+  let horzCounter = 0;
+
+  for(let i = 0; i < walk.length; i++){
+    if(walk[i] == "n"){
+      vertCounter += 1;
+    } else if(walk[i] == "s"){
+      vertCounter -= 1;
+    } else if(walk[i] == "e"){
+      horzCounter += 1;
+    } else if(walk[i] == "w"){
+      horzCounter -= 1;
+    }
+  }
+  if(vertCounter == 0 && horzCounter == 0){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+console.log(isValidWalk(['n','s','n','s','n','s','n','s','n','s']));//true
+console.log(isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e'])); //false
+console.log(isValidWalk(['w'])); //false
+console.log(isValidWalk(['n','n','n','s','n','s','n','s','n','s']));//false
+console.log('----------------------------------------------------')
+// Write a function, persistence, that takes in a positive parameter num and returns its multiplicative persistence,
+//  which is the number of times you must multiply the digits in num until you reach a single digit.
+
+// For example (Input --> Output):
+
+// 39 --> 3 (because 3*9 = 27, 2*7 = 14, 1*4 = 4 and 4 has only one digit)
+// 999 --> 4 (because 9*9*9 = 729, 7*2*9 = 126, 1*2*6 = 12, and finally 1*2 = 2)
+// 4 --> 0 (because 4 is already a one-digit number)
+
+function persistence(num) {
+  const numArray = num.toString().split("");
+  let counter = 0;
+  
+  let chicken = num;
+  
+  while (chicken > 9) {
+    let digits = chicken.toString().split("");
+    chicken = digits.reduce((a, b) => {
+      return parseInt(a) * parseInt(b); 
+    });
+    counter++; 
+  }
+
+  return counter;
+}
+
+console.log(persistence(39)); // Output: 3
+console.log(persistence(4)); // Output: 0
+console.log(persistence(25)); // Output: 2
+console.log(persistence(999)); // Output: 4
+console.log('----------------------------------------------------')
+
+// Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+
+function moveZeros(arr) {
+  let zeroArray = [];
+  let everythingArray = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0 && typeof arr[i] !== 'boolean') {
+      zeroArray.push(arr[i]);
+    } else {
+      everythingArray.push(arr[i]);
+    }
+  }
+
+  for (let i = 0; i < zeroArray.length; i++) {
+    everythingArray.push(zeroArray[i]);
+  }
+
+  return everythingArray;
+}
+
+
+console.log(moveZeros([ 'a', 'b', null, 'c', 'd', 1, 1, 3, [], 1, 9, {}, 9, +0, +0, +0, false, +0, +0, +0, +0, +0, +0, +0 ]));
+
+
+//Expected
+[ 'a', 'b', null, 'c', 'd', 1, false, 1, 3, [], 1, 9, {}, 9, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0 ]
