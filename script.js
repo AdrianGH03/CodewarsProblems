@@ -1003,3 +1003,104 @@ console.log(moveZeros([ 'a', 'b', null, 'c', 'd', 1, 1, 3, [], 1, 9, {}, 9, +0, 
 
 //Expected
 [ 'a', 'b', null, 'c', 'd', 1, false, 1, 3, [], 1, 9, {}, 9, +0, +0, +0, +0, +0, +0, +0, +0, +0, +0 ]
+console.log('----------------------------------------------------')
+
+
+
+// Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+
+// Examples
+// pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
+// pigIt('Hello world !');     // elloHay orldway !
+
+function pigIt(str){
+  const pigArr = str.split(" ")
+  let chicken = []
+
+  for(let i = 0; i < pigArr.length; i++){
+    const first = pigArr[i][0]
+    const modifiedStr = pigArr[i].slice(1) + first + "ay";
+    if (pigArr[i].startsWith("!") || pigArr[i].startsWith("?") || pigArr[i].startsWith("_") || pigArr[i].startsWith("-") || pigArr[i].startsWith("%") || pigArr[i].startsWith("^") || pigArr[i].startsWith("&")) {
+      chicken.push(pigArr[i]);
+    } else {
+      chicken.push(modifiedStr);
+    }
+    
+  }
+  return chicken.join(" ")
+}
+
+console.log(pigIt('Pig latin is cool')) 
+console.log(pigIt('This is my string'))
+console.log('----------------------------------------------------')
+
+
+function humanReadable(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  return formattedTime;
+}
+console.log(humanReadable(0));
+console.log(humanReadable(59));
+console.log(humanReadable(60));
+console.log(humanReadable(90));
+console.log(humanReadable(3599));
+console.log(humanReadable(3600));
+console.log(humanReadable(86400));
+console.log(humanReadable(359999));
+console.log('----------------------------------------------------')
+
+function rgb(r, g, b) {
+  const hexValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+
+  let hexColor = [];
+
+  if (r > 255) {
+    r = 255;
+  } else if (r < 0) {
+    r = 0;
+  }
+  const redHex = hexValues[Math.floor(r / 16)].toString() + hexValues[r % 16].toString();
+  hexColor.push(redHex);
+
+  if (g > 255) {
+    g = 255;
+  } else if (g < 0) {
+    g = 0;
+  }
+  const greenHex = hexValues[Math.floor(g / 16)].toString() + hexValues[g % 16].toString();
+  hexColor.push(greenHex);
+
+  if (b > 255) {
+    b = 255;
+  } else if (b < 0) {
+    b = 0;
+  }
+  const blueHex = hexValues[Math.floor(b / 16)].toString() + hexValues[b % 16].toString();
+  hexColor.push(blueHex);
+
+  return hexColor.join("");
+}
+
+console.log(rgb(0, 0, 0)); // Output: "000000"
+console.log(rgb(0, 0, -20)); // Output: "000000"
+console.log(rgb(300, 255, 255)); // Output: "FFFFFF"
+console.log(rgb(173, 255, 47)); // Output: "ADFF2F"
+
+
+
+
+
+
+
+console.log("----------------------------------------------")
+
+
+console.log(rgb(0, -500, 2555))
+console.log(rgb(0, 0, -20))
+console.log(rgb(300,255,255))
+console.log(rgb(173,255,47))
+console.log(rgb(69,107,264))
