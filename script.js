@@ -1104,3 +1104,111 @@ console.log(rgb(0, 0, -20))
 console.log(rgb(300,255,255))
 console.log(rgb(173,255,47))
 console.log(rgb(69,107,264))
+
+console.log("----------------------------------------------")
+// The marketing team is spending way too much time typing in hashtags.
+// Let's help them with our own Hashtag Generator!
+
+// Here's the deal:
+
+// It must start with a hashtag (#).
+// All words must have their first letter capitalized.
+// If the final result is longer than 140 chars it must return false.
+// If the input or the result is an empty string it must return false.
+// Examples
+// " Hello there thanks for trying my Kata"  =>  "#HelloThereThanksForTryingMyKata"
+// "    Hello     World   "                  =>  "#HelloWorld"
+// ""                                        =>  false
+
+function generateHashtag (str) {
+  if (str.trim() === '') {
+    return false;
+  }
+  const strr = str.split(" ").filter(value => value.trim() !== '');
+  let modifiedWords = []
+  for(let i = 0; i < strr.length; i++){
+    const lengthOfElement = strr[i].split("")
+    if (strr.length === 0 || strr.join('').length >= 140) {
+      return false;
+    }
+    const firstWord = strr[0]
+    const modifiedLetter = strr[i][0].toUpperCase()
+    let modifiedWord = "#"+modifiedLetter+strr[i].slice(1)
+    if(strr[i] != strr[0]){
+      modifiedWord = modifiedWord.slice(1)
+    } 
+    modifiedWords.push(modifiedWord)
+    
+    
+  }
+  return modifiedWords.join("")
+}
+
+console.log(generateHashtag("Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Cat"))
+console.log(generateHashtag("Do We have A Hashtag"))
+console.log(generateHashtag("a".repeat(140)))
+console.log(generateHashtag("code" + " ".repeat(140) + "wars"))
+console.log(generateHashtag("codewars is nice"))
+console.log(generateHashtag(''))
+console.log("----------------------------------------------")
+
+function rot13(message){
+  const alphabet = Array.from("abcdefghijklmnopqrstuvwxyz")
+  const messageArray = message.split("")
+  let modifiedWord = ""
+  for(let i=0; i < messageArray.length; i++){
+    let letter = messageArray[i]
+    if (alphabet.includes(letter.toLowerCase())) {
+      const letterIndex = alphabet.indexOf(letter.toLowerCase());
+      const targetIndex = (letterIndex - 13 + alphabet.length) % alphabet.length;
+      let modifiedLetter = alphabet[targetIndex];
+      if (letter === letter.toUpperCase()) {
+        modifiedLetter = modifiedLetter.toUpperCase();
+      }
+      modifiedWord += modifiedLetter;
+    } else {
+      modifiedWord += letter;
+    }
+  }
+  return modifiedWord
+}
+//const targetIndex = (index - aboveIndex + length) % length;
+console.log(rot13("TesT"))
+console.log(rot13("hello"))
+console.log(rot13("HeLLo"))
+console.log(rot13("LMAOOO"))
+
+console.log("----------------------------------------------")
+
+function dirReduc(arr) {
+  let d = arr.slice(); // Create a copy of the original array
+  let reductionMade = true;
+
+  while (reductionMade) {
+    reductionMade = false;
+
+    for (let i = 0; i < d.length - 1; i++) {
+      if (
+        (d[i] === "SOUTH" && d[i + 1] === "NORTH") ||
+        (d[i] === "NORTH" && d[i + 1] === "SOUTH")
+      ) {
+        d.splice(i, 2); // Remove the pair of opposite directions
+        reductionMade = true;
+        break; // Restart the loop after a reduction is made
+      } else if (
+        (d[i] === "WEST" && d[i + 1] === "EAST") ||
+        (d[i] === "EAST" && d[i + 1] === "WEST")
+      ) {
+        d.splice(i, 2); // Remove the pair of opposite directions
+        reductionMade = true;
+        break; // Restart the loop after a reduction is made
+      }
+    }
+  }
+
+  return d;
+}
+console.log(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
+console.log(dirReduc(["NORTH", "WEST", "SOUTH", "EAST"]))
+console.log(dirReduc(["NORTH", "SOUTH", "EAST", "WEST", "EAST", "WEST"]))
+console.log("----------------------------------------------")
