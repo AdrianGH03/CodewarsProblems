@@ -1212,3 +1212,169 @@ console.log(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"
 console.log(dirReduc(["NORTH", "WEST", "SOUTH", "EAST"]))
 console.log(dirReduc(["NORTH", "SOUTH", "EAST", "WEST", "EAST", "WEST"]))
 console.log("----------------------------------------------")
+
+function zero(operation) {
+  if (operation) {
+    return operation(0);
+  } else {
+    return 0;
+  }
+}
+function one(operation) {
+  if (operation) {
+    return operation(1);
+  } else {
+    return 1;
+  }
+}
+function two(operation) {
+  if (operation) {
+    return operation(2);
+  } else {
+    return 2;
+  }
+}
+function three(operation) {
+  if (operation) {
+    return operation(3);
+  } else {
+    return 3;
+  }
+}
+function four(operation) {
+  if (operation) {
+    return operation(4);
+  } else {
+    return 4;
+  }
+}
+function five(operation) {
+  if (operation) {
+    return operation(5);
+  } else {
+    return 5;
+  }
+}
+function six(operation) {
+  if (operation) {
+    return operation(6);
+  } else {
+    return 6;
+  }
+}
+function seven(operation) {
+  if (operation) {
+    return operation(7);
+  } else {
+    return 7;
+  }
+}
+function eight(operation) {
+  if (operation) {
+    return operation(8);
+  } else {
+    return 8;
+  }
+}
+function nine(operation) {
+  if (operation) {
+    return operation(9);
+  } else {
+    return 9;
+  }
+}
+
+function plus(right) {
+  return function(left){
+    return Math.floor(left + right)
+  }
+}
+function minus(right) {
+  return function(left){
+    return Math.floor(left - right)
+  }
+}
+function times(right) {
+  return function(left){
+    return Math.floor(left * right)
+  }
+}
+function dividedBy(right) {
+  return function(left){
+    return Math.floor(left / right)
+  }
+}
+
+console.log(seven(times(five()))); // Returns 35
+console.log(four(plus(nine()))); // Returns 13
+console.log(eight(minus(three()))); // Returns 5
+console.log(four(dividedBy(nine()))); // Returns 3
+
+
+console.log("----------------------------------------------")
+
+
+function cakes(recipe, available) {
+  const recipeKeys = Object.keys(recipe)
+  const availableKeys = Object.keys(available)
+  const hasSameKeys = recipeKeys.every(key => availableKeys.includes(key));
+  let amountOfTimes = []
+  if(!hasSameKeys){
+    return 0
+  }
+  for (const key of recipeKeys) {
+    const value1 = recipe[key];
+    const value2 = available[key];
+    
+    if (value2 === undefined || value1 > value2) {
+      return 0;
+    }
+    
+    const remainder = Math.floor(value2 / value1);
+    amountOfTimes.push(remainder)
+  }
+  return Math.min(...amountOfTimes)
+}
+
+const recipe = {apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100};
+const available = {sugar: 500, flour: 2000, milk: 2000};
+console.log(cakes(recipe, available));
+
+let recipe1 = {flour: 500, sugar: 200, eggs: 1};
+let available1 = {flour: 1200, sugar: 1200, eggs: 5, milk: 200};
+console.log(cakes(recipe1, available1));
+
+
+
+console.log("----------------------------------------------")
+
+function firstNonRepeatingLetter(s) {
+  const sArray = s.split("");
+  for (let i = 0; i < sArray.length; i++) {
+    const currentChar = sArray[i].toLowerCase();
+    let isRepeated = false;
+
+    for (let j = 0; j < sArray.length; j++) {
+      if (i !== j && currentChar === sArray[j].toLowerCase()) {
+        isRepeated = true;
+        break;
+      }
+    }
+
+    if (!isRepeated) {
+      return sArray[i];
+    }
+  }
+
+  return null; 
+}
+
+
+console.log(firstNonRepeatingLetter('a'));
+console.log(firstNonRepeatingLetter('sTress'));
+console.log(firstNonRepeatingLetter('moonmen'));
+
+
+console.log("----------------------------------------------")
+
+
