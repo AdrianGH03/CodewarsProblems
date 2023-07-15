@@ -1378,3 +1378,72 @@ console.log(firstNonRepeatingLetter('moonmen'));
 console.log("----------------------------------------------")
 
 
+function orderWeight(strng) {
+  const strngArr = strng.split(" ").filter(value => value !== '');
+  const sortedArray = strngArr.sort((a, b) => {
+    const sumA = Array.from(a).reduce((sum, digit) => sum + parseInt(digit), 0);
+    const sumB = Array.from(b).reduce((sum, digit) => sum + parseInt(digit), 0);
+
+    if (sumA !== sumB) {
+      return sumA - sumB;
+    } else {
+      return a.localeCompare(b);
+    }
+  });
+
+  return sortedArray.join(" ");
+}
+
+console.log(orderWeight("1 200 2 22 200 413 4 6 6 7 7 9 18 27 72 81 91"))
+console.log(orderWeight("56 65 74 100 99 68 86 180 90"))
+console.log(orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"))
+
+
+
+console.log("----------------------------------------------")
+
+function scramble(str1, str2) {
+  const str1Arr = str1.split("").filter(value => value !== '');
+  const str2Arr = str2.split("").filter(value => value !== '');
+
+  const str1Freq = {};
+  for (const char of str1Arr) {
+    str1Freq[char] = (str1Freq[char] || 0) + 1;
+  }
+
+  for (const char of str2Arr) {
+    if (!str1Freq[char] || str1Freq[char] === 0) {
+      return false;
+    }
+    str1Freq[char]--;
+  }
+
+  return true;
+}
+
+console.log(scramble('rkqodlw',           'world'      ));
+console.log(scramble('cedewaraaossoqqyt', 'codewars'   ));
+console.log(scramble('scriptsjava',       'javascripts'));
+console.log(scramble('javscripts',        'javascript' ));
+console.log(scramble('jscripts',          'javascript' ));
+console.log("----------------------------------------------")
+
+
+var lastDigit = function(str1, str2) {
+  if (str2 == 0) {
+    return 1;
+  }
+
+  const lastDigitStr1 = Number(str1.slice(-1));
+  const remainder = Number(str2.slice(-2)) % 4;
+  const poweredNum = Math.pow(lastDigitStr1, remainder === 0 ? 4 : remainder);
+  const lastDigit = poweredNum % 10;
+
+  return lastDigit;
+};
+
+console.log(lastDigit("4", "1"));
+console.log(lastDigit("4", "2"));
+console.log(lastDigit("9", "7"));
+console.log(lastDigit("1606938044258990275541962092341162602522202993782792835301376","2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397376"));
+console.log(lastDigit("10","10000000000"));
