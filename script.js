@@ -1447,3 +1447,98 @@ console.log(lastDigit("4", "2"));
 console.log(lastDigit("9", "7"));
 console.log(lastDigit("1606938044258990275541962092341162602522202993782792835301376","2037035976334486086268445688409378161051468393665936250636140449354381299763336706183397376"));
 console.log(lastDigit("10","10000000000"));
+
+console.log("----------------------------------------------")
+
+function toUnderscore(string) {
+  if(Number(string)){
+    return string.toString()
+  }
+  const words = string.match(/[A-Z][a-z0-9]+/g);
+  // .match(): This is a JavaScript string method that searches for matches between a regular expression and the string. It returns an array of all the matches found.
+
+  // /[A-Z][a-z0-9]+/g: This is the regular expression pattern that defines the criteria for matching words. Let's break it down further:
+
+  // [A-Z]: This part matches any uppercase letter from A to Z. It ensures that the word starts with an uppercase letter.
+
+  // [a-z0-9]+: This part matches one or more lowercase letters or digits. It allows lowercase letters and numbers to follow the uppercase letter, 
+  // making sure that the rest of the word consists of a combination of lowercase letters and digits.
+
+  // /g: This flag at the end of the regular expression indicates that it should find all matches in the input string, not just the first one.
+  const wordsLowerCase = words.map(word => word.toLowerCase())
+  return wordsLowerCase.join("_")
+}
+console.log(toUnderscore("TestController"))
+console.log(toUnderscore("MoviesAndBooks"))
+console.log(toUnderscore("App7Test"))
+console.log(toUnderscore(1))
+
+
+console.log("----------------------------------------------")
+
+
+function RoundThis(number) {
+  const decimalPlaces = number.toString().split('.')[1];
+  if (decimalPlaces === undefined) {
+    return number;
+  } else {
+    const integerPart = number | 0;
+    const fractionalPart = +("0." + decimalPlaces);
+    if (fractionalPart >= 0.5) {
+      return integerPart + 1;
+    } else {
+      return integerPart;
+    }
+  }
+}
+
+function CeilThis(number) {
+  const integerPart = number | 0;
+  if (number === integerPart) {
+    return integerPart;
+  } else {
+    return integerPart + 1;
+  }
+  
+};
+
+function FloorThis(number) {
+  number = number - 0.5;
+  if (number < 0) {
+    number = 0;
+  }
+  return Number(number.toFixed());
+};
+
+console.log(RoundThis(31.000000001))
+console.log(CeilThis(0.4))
+console.log(FloorThis(0.4))
+
+console.log("----------------------------------------------")
+
+function incrementString(strng) {
+  // Extract the numeric part at the end of the string
+  const numericPart = strng.match(/\d+$/);
+
+  if (numericPart === null) {
+    // If no numeric part is found, simply append "1" to the string
+    return strng + "1";
+  } else {
+    // Increment the numeric part
+    const number = parseInt(numericPart[0], 10);
+    const incrementedNumber = number + 1;
+
+    // Determine the number of leading zeros in the original numeric part
+    const leadingZeros = numericPart[0].match(/^0+/);
+
+    // Create the new numeric part with the preserved leading zeros
+    const incrementedNumericPart = incrementedNumber.toString().padStart(numericPart[0].length, "0");
+
+    // Replace the original numeric part with the incremented numeric part
+    return strng.replace(/\d+$/, incrementedNumericPart);
+  }
+}
+console.log(incrementString("foobar000"))
+console.log(incrementString("foobar00999"))
+console.log(incrementString("foo"))
+console.log(incrementString("foobar001"))
