@@ -1542,3 +1542,26 @@ console.log(incrementString("foobar000"))
 console.log(incrementString("foobar00999"))
 console.log(incrementString("foo"))
 console.log(incrementString("foobar001"))
+
+
+console.log("----------------------------------------------")
+
+function hexStringToRGB(hexValue) {
+  // Remove the "#" symbol if present
+  const hex = hexValue.replace("#", "");
+
+  // Split the hex string into red, green, and blue components
+  const redHex = hex.substring(0, 2);
+  const greenHex = hex.substring(2, 4);
+  const blueHex = hex.substring(4, 6);
+
+  // Convert each hex component to decimal
+  const red = parseInt(redHex, 16);
+  const green = parseInt(greenHex, 16);
+  const blue = parseInt(blueHex, 16);
+
+  // Return the RGB values as an object or formatted string
+  return { r: red, g: green, b: blue };
+}
+
+console.log(hexStringToRGB("#FF9933")); // Output: "000000"
