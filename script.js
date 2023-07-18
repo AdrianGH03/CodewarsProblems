@@ -1565,3 +1565,117 @@ function hexStringToRGB(hexValue) {
 }
 
 console.log(hexStringToRGB("#FF9933")); // Output: "000000"
+
+
+console.log("----------------------------------------------")
+
+function findUniq(arr) {
+  const words = arr.map(element => {
+    const word = element.toLowerCase().replace(/\s/g, '');
+    return word;
+  });
+
+  console.log('Array Name: ' + arr);
+
+  for (let i = 0; i < words.length; i++) {
+    let isUnique = true;
+    for (let j = 0; j < words.length; j++) {
+      if (i !== j && compareLetters(words[i], words[j])) {
+        isUnique = false;
+        break;
+      }
+    }
+    if (isUnique) {
+      console.log('---------Culprit: ' + arr[i]);
+      return ''
+    }
+  }
+
+  return '';
+}
+
+function compareLetters(word1, word2) {
+  const set1 = new Set(word1);
+  const set2 = new Set(word2);
+  return set1.size === set2.size && [...set1].every(letter => set2.has(letter));
+  // const set1 = new Set(word1); creates a Set object set1 from the characters of word1. The Set data structure stores unique values, 
+  // so it automatically removes duplicate letters from word1.
+
+  // const set2 = new Set(word2); creates a Set object set2 from the characters of word2, following the same logic as in step 1.
+  // set1.size === set2.size compares the sizes of set1 and set2 using the strict equality operator (===). If the sizes are not equal, 
+  // it means that the words have a different number of unique letters and are not considered equal.
+
+  // [...set1].every(letter => set2.has(letter)) uses the spread operator (...) to convert set1 into an array and then 
+  // applies the every method on that array. The every method checks if every letter in set1 is present in set2 by using the has method of 
+  // set2. If any letter from set1 is not found in set2, the condition evaluates to false.
+
+  // The compareLetters function returns the result of the comparison: set1.size === set2.size && [...set1].every(letter => set2.has(letter)). 
+  // If both conditions are true, it means that the words have the same unique letters, regardless of the number of occurrences.
+}
+
+
+console.log(findUniq([ 'Aa', 'aaa', 'aaaaa', 'BbBb', 'Aaaa', 'AaAaAa', 'a' ]));
+console.log(findUniq([ 'abc', 'acb', 'bac', 'foo', 'bca', 'cab', 'cba' ]));
+
+console.log("----------------------------------------------")
+
+function workOnStrings(a, b) {
+  const aArr = [...a];
+  const bArr = [...b];
+
+  const checkA = aArr.map(letter => {
+    const occurrences = bArr.filter(l => l.toLowerCase() === letter.toLowerCase()).length;
+    const isCapitalized = letter.toUpperCase() === letter;
+    if ((occurrences % 2 === 0 && !isCapitalized) || (occurrences % 2 !== 0 && isCapitalized)) {
+      return letter.toLowerCase();
+    } else {
+      return letter.toUpperCase();
+    }
+  });
+
+  const checkB = bArr.map(letter => {
+    const occurrences = aArr.filter(l => l.toLowerCase() === letter.toLowerCase()).length;
+    const isCapitalized = letter.toUpperCase() === letter;
+    if ((occurrences % 2 === 0 && !isCapitalized) || (occurrences % 2 !== 0 && isCapitalized)) {
+      return letter.toLowerCase();
+    } else {
+      return letter.toUpperCase();
+    }
+  });
+
+  return checkA.join("") + checkB.join("");
+}
+
+console.log(workOnStrings("abc","cde")); //, "abCCde"
+console.log(workOnStrings("abcdeFgtrzw", "defgGgfhjkwqe")); //, "abcDeFGtrzWDEFGgGFhjkWqE"
+console.log(workOnStrings("abcdeFg", "defgG")); //, "abcDEfgDEFGg"
+console.log(workOnStrings("abab", "bababa")); //, "ABABbababa"
+
+console.log("----------------------------------------------")
+
+sortme = function( courses ){
+  const sortFunc = courses.map(course => {
+    const regex = /^([^\-]+)/;
+    const nameMatch = course.match(regex);
+    const numberRegex = /-(\d+)/;
+    const numberMatch = course.match(numberRegex);
+    return {
+      name: nameMatch ? nameMatch[1] : '',
+      year: numberMatch ? numberMatch[1] : '',
+    };
+  })
+
+  sortFunc.sort((a, b) => {
+    if (a.year === b.year) {
+      return a.name.localeCompare(b.name);
+    } else {
+      return a.year - b.year;
+    }
+  });
+  const toStrng = sortFunc.map(course => course.name.toString() + '-' + course.year.toString())
+  return toStrng
+}
+console.log(sortme(["web-1305","site-1305","web-1304","site-1304"])) //, ["site-1304", "web-1304", "site-1305", "web-1305"]
+console.log(sortme(['aeb-1305', 'site-1305', 'play-1215', 'web-1304', 'site-1304', 'beb-1305'])) //, ["play-1215", "site-1304", "web-1304", "aeb-1305", "beb-1305", "site-1305"]
+console.log(sortme([]))
+console.log(sortme(['aeb-1305', 'aeb-1305'])) //, ['aeb-1305', 'aeb-1305']
