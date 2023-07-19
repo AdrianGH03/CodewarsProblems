@@ -192,6 +192,7 @@ for(let i = 0; i < accountList.length; i++){
   console.log(accountList[i].describe())
 }
 console.log('----------------------------------------------------')
+
 function arrAdder(arr) {
   let sentence = '';
   for (let i = 0; i < arr[0].length; i++) {
@@ -204,7 +205,7 @@ function arrAdder(arr) {
     }
     sentence += ' '; 
   }
-  return sentence.trim();
+  return sentence;
 }
 const lettersArray = [
   ['J','L','L','M'],
@@ -1679,3 +1680,28 @@ console.log(sortme(["web-1305","site-1305","web-1304","site-1304"])) //, ["site-
 console.log(sortme(['aeb-1305', 'site-1305', 'play-1215', 'web-1304', 'site-1304', 'beb-1305'])) //, ["play-1215", "site-1304", "web-1304", "aeb-1305", "beb-1305", "site-1305"]
 console.log(sortme([]))
 console.log(sortme(['aeb-1305', 'aeb-1305'])) //, ['aeb-1305', 'aeb-1305']
+
+
+function makeLooper(str) {
+  var index = 0;
+  var length = str.length;
+
+  function getNextChar() {
+    if (index >= length) {
+      index = 0;
+    }
+    var char = str.charAt(index);
+    index++;
+    
+    return char;
+  }
+
+  return getNextChar;
+}
+
+
+var abc = makeLooper('abc');
+console.log(abc()); // Output: 'a'
+console.log(abc()); // Output: 'b'
+console.log(abc()); // Output: 'c'
+console.log(abc()); // Output: 'a' again
