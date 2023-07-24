@@ -1,3 +1,289 @@
+// Hello, object
+// importance: 5
+// Write the code, one line for each action:
+
+// Create an empty object user.
+// Add the property name with the value John.
+// Add the property surname with the value Smith.
+// Change the value of the name to Pete.
+// Remove the property name from the object.
+let user = {
+  name: "John",
+  surname: "Smith",
+};
+user.name = "Pete";
+delete user.name;
+console.log(user.name);
+console.log("--------------------------------")
+
+// Check for emptiness
+// importance: 5
+// Write the function isEmpty(obj) which returns true if the object has no properties, false otherwise.
+
+// Should work like that:
+
+// let schedule = {};
+
+// alert( isEmpty(schedule) ); // true
+
+// schedule["8:30"] = "get up";
+
+// alert( isEmpty(schedule) ); // false
+// Open a sandbox with tests.
+
+function isEmpty(obj){
+  if(Object.keys(obj) == ''){
+      return true;
+  } else if (Object.keys(obj) != '') {
+      return false;
+  }
+}
+let schedule = {};
+console.log(isEmpty(schedule));
+schedule["8:30"] = "get up";
+console.log(isEmpty(schedule))
+console.log("--------------------------------")
+
+
+// Sum object properties
+// importance: 5
+// We have an object storing salaries of our team:
+
+// let salaries = {
+//   John: 100,
+//   Ann: 160,
+//   Pete: 130
+// }
+// Write the code to sum all salaries and store in the variable sum. Should be 390 in the example above.
+
+// If salaries is empty, then the result must be 0.
+
+let salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+let toArray = Array.from(Object.values(salaries));
+let result = toArray.reduce((a, b) => {
+  return a + b;
+}, 0);
+console.log(result);
+
+//This is what i was thinking to do, but the let sum = 0 needed to be outside the for in loop...
+let sum = 0;
+for (let key in salaries) {
+sum += salaries[key];
+}
+console.log(sum); // 390
+console.log("--------------------------------")
+
+// Multiply numeric property values by 2
+// importance: 3
+// Create a function multiplyNumeric(obj) that multiplies all numeric property values of obj by 2.
+
+// For instance:
+
+// // before the call
+// let menu = {
+//   width: 200,
+//   height: 300,
+//   title: "My menu"
+// };
+
+// multiplyNumeric(menu);
+
+// // after the call
+// menu = {
+//   width: 400,
+//   height: 600,
+//   title: "My menu"
+// };
+// Please note that multiplyNumeric does not need to return anything. It should modify the object in-place.
+
+// P.S. Use typeof to check for a number here.
+
+let menu = {
+width: 200,
+height: 300,
+title: "My menu"
+};
+
+function multiplyNumeric(menu){
+  for(let key in menu){
+      if(typeof menu[key] == "number"){
+          menu[key] = menu[key]*2;
+      }
+  }
+}
+multiplyNumeric(menu);
+console.log(menu.height);
+
+console.log("--------------------------------")
+//CODEWAR PROBLEMS START HERE
+
+
+//Problem 1, remove first and last number, replace , with space
+
+function array(string) {
+  // convert to array, pop and shift, join by space, convert back to string
+  let newArr = string.split(",");
+  newArr.pop();
+  newArr.shift();
+  if(newArr == ''){
+      newArr = null;
+      return newArr;
+  } else {
+      newArr = newArr.toString();
+      let finalString = newArr.replaceAll(",", " ");
+      return finalString;
+  }
+  
+}
+console.log(array('1,2,2,3,3,3,3,33,3,'));
+
+console.log("--------------------------------")
+
+
+//Problem 2, take array of numbers and give reverse of each ex. 1 --> -1, -2 --> 2
+function invert(array) {
+  
+  let newArr = [];
+  array.forEach(number => {
+      if(number > 0){
+          number = -Math.abs(number);
+          newArr.push(number);
+      } else if (number < 0){
+          number = Math.abs(number);
+          newArr.push(number);
+      } else if (number == 0){
+          newArr.push(number);
+      }
+  })
+  return newArr;
+}
+console.log(invert([0]));
+
+console.log("--------------------------------")
+
+//Problem 3, reverse the array
+
+function fixTheMeerkat(arr) {
+  let newKat = arr.reverse()
+  return newKat;
+}
+console.log(fixTheMeerkat(["head", "body", "torso"]))
+
+console.log("--------------------------------")
+
+//Problem 4, return new array with length of each word appended to the word
+
+// "apple ban" --> ["apple 5", "ban 3"]
+// "you will win" -->["you 3", "will 4", "win 3"]
+
+function addLength(str) {
+  let strArr = str.split(" ");
+  let lengthOfWord = strArr.map(word => {
+      return word + " " + word.length;
+  });
+  return lengthOfWord;
+  
+}
+console.log(addLength("apple ban dog"));
+console.log("--------------------------------")
+
+//CODEWARS DAY 1 PROBLEMS END HERE
+
+//CLASS 22 CODE
+//check if code has a question mark
+let questionOrNot = "Is this a question?";
+if(questionOrNot.includes("?")){
+  console.log("Yes, this is a question");
+} else {
+  console.log("No this isn't a question")
+}
+
+//replace specific word with another one, if it is included
+let multipleWords = "Hello I am John, a jr. dev at 100 devs";
+if(multipleWords.includes("jr. dev")){
+  multipleWords = multipleWords.replace("jr. dev", "Software Engineer");
+}
+console.log(multipleWords)
+
+//Makes the console give a random number between 0 and 1 and store each (worth 0.33 per) in a variable
+function game(number){
+  let result;
+  if(number > 0.6666){
+      result = "Scissors"
+  } else if (number < 0.6666 && number > 0.3333){
+      result = "Paper"
+  } else {
+      result = "Rock";
+  }
+  return result;
+}
+console.log(game(Math.random()));
+
+//checks if the user won or lost the previous function
+function winOrLose(userChoice){
+  let botResult = game(Math.random());
+  let userResult;
+  if(botResult == "Scissors" && userChoice == "Paper"){
+      userResult = "You lost! ";
+  } else if (botResult == "Rock" && userChoice == "Scissors"){
+      userResult = "You lost! ";
+  } else if (botResult == "Paper" && userChoice == "Rock"){
+      userResult = "You lost! ";
+  } else if (botResult == userChoice) {
+      userResult = "Tie. ";
+  } else {
+      userResult = "YOU WON!!! ";
+  }
+  console.log(botResult)
+  return userResult;
+}
+console.log(winOrLose("Scissors"))
+
+//Repeat the rock paper scissors game x times
+function choices(arrayOfChoices, userChoice){
+  let x = arrayOfChoices.length;
+  console.log(winOrLose(userChoice).repeat(x));
+}
+choices([1,2,3,4,5,6], "Scissors")
+
+//adding all values in an array using reduce
+let twentyTwo = [1,5,2,3,5,34].reduce((startValue, index) => startValue + index, 0);
+console.log(twentyTwo)
+
+//creating new array using map that makes all elements squared
+function mapSquared(arrOfNum){
+  return arrOfNum.map(index => index*index);
+}
+console.log(mapSquared([5,2,1,3,5]))
+
+//reversing a string
+function reverseAString(stringg){
+  let backToString = stringg.split("").reverse().join('')
+  return backToString;
+}
+console.log(reverseAString("Lmao"))
+
+//Palindrome check
+function palindromeOrNot(word){
+  let palindromeCheck = word.split("").reverse().join('');
+  if(word.toUpperCase() == palindromeCheck.toUpperCase()){
+      console.log("Its a palindrome");
+  } else {
+      console.log("It's not a palindrome");
+  }
+}
+palindromeOrNot("Nun");
+
+//create dog object with 4 properties and 3 methods
+
+
+
+
+
 // Trolls are attacking your comment section!
 // A common way to deal with this situation is to remove all of the vowels from the trolls' comments, neutralizing the threat.
 // Your task is to write a function that takes a string and return a new string with all vowels removed.
