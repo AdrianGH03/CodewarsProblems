@@ -1,3 +1,47 @@
+// The Cat In The Hat has cat A under his hat, cat A has cat B under his hat and so on until Z
+// The Cat In The Hat is 2,000,000 cat units tall.
+// Each cat is 2.5 times bigger than the cat underneath their hat.
+// Find the total height of the cats if they are standing on top of one another.
+// Countig starts from the Cat In The Hat
+// n = the number of cats
+// fix to 3 decimal places.
+// assert.strictEqual(height(7), "3331148.800");
+//     assert.strictEqual(height(0), "2000000.000")
+function height(n) {
+  let initialCat = 2000000;
+  var resultArray = [initialCat];
+  for (var i = 0; i < n; i++) {
+    initialCat /= 2.5;
+    resultArray.push(initialCat);
+  }
+  var sum = resultArray.reduce((a,b) => a + b );
+  
+  return sum.toFixed(3);
+}
+console.log(height(7));
+
+// YouTube had a like and a dislike button, which allowed users to express their opinions about particular content. 
+// It was set up in such a way that you cannot like and dislike a video at the same time. There are two other interesting rules to be noted about the interface: 
+// Pressing a button, which is already active, will undo your press. If you press the like button after pressing the dislike button, the like button overwrites the previous 
+// "Dislike" state. The same is true for the other way round.
+
+// Task
+// Create a function that takes in a list of button inputs and returns the final state.
+
+
+function likeOrDislike(buttons) {
+  let result = "Nothing";
+  for (let i = 0; i < buttons.length; i++) {
+    if (buttons[i] == result) {
+      result = "Nothing";
+    } else {
+      result = buttons[i];
+    }
+  }
+  return result;
+  
+}
+console.log(likeOrDislike(["Dislike", "Like","Like", "Like"]))
 // Hello, object
 // importance: 5
 // Write the code, one line for each action:
