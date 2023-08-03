@@ -2011,7 +2011,7 @@ console.log(sortme(['aeb-1305', 'site-1305', 'play-1215', 'web-1304', 'site-1304
 console.log(sortme([]))
 console.log(sortme(['aeb-1305', 'aeb-1305'])) //, ['aeb-1305', 'aeb-1305']
 
-
+console.log("----------------------------------------------")
 function makeLooper(str) {
   var index = 0;
   var length = str.length;
@@ -2035,3 +2035,18 @@ console.log(abc()); // Output: 'a'
 console.log(abc()); // Output: 'b'
 console.log(abc()); // Output: 'c'
 console.log(abc()); // Output: 'a' again
+console.log("----------------------------------------------")
+
+function order(words){
+  const wordsArr = words.split(" ").filter(value => value !== '');
+  return wordsArr.sort((a, b) => {
+    const aNum = a.match(/\d+/); //Returns number from each element in wordsArr (each word)
+    const bNum = b.match(/\d+/); //Returns next number from above.
+    return aNum - bNum; //Calculates order of wordsArr based on number in each word.
+  }).join(" ");
+}
+
+
+console.log(order("is2 Thi1s T4est 3a")) //"Thi1s is2 3a T4est"
+console.log(order("4of Fo1r pe6ople g3ood th5e the2")) //"Fo1r the2 g3ood 4of th5e pe6ople"
+console.log(order("")) //"empty input should return empty string" 
