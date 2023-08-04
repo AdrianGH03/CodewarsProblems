@@ -2050,3 +2050,22 @@ function order(words){
 console.log(order("is2 Thi1s T4est 3a")) //"Thi1s is2 3a T4est"
 console.log(order("4of Fo1r pe6ople g3ood th5e the2")) //"Fo1r the2 g3ood 4of th5e pe6ople"
 console.log(order("")) //"empty input should return empty string" 
+
+
+
+
+var uniqueInOrder=function(iterable){
+  const iterableArr = Array.isArray(iterable) ? iterable : iterable.split("");
+  const uniqueArr = [];
+  for (let i = 0; i < iterableArr.length; i++) {
+    if (iterableArr[i] !== iterableArr[i + 1]) {
+      uniqueArr.push(iterableArr[i]);
+    }
+  }
+  return uniqueArr;
+}
+
+
+console.log(uniqueInOrder('AAAABBBCCDAABBB')) // == ['A', 'B', 'C', 'D', 'A', 'B']
+console.log(uniqueInOrder('ABBCcAD')    )     // == ['A', 'B', 'C', 'c', 'A', 'D']
+console.log(uniqueInOrder([1,2,2,3,3]) )      // == [1,2,3]
