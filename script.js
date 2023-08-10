@@ -2064,13 +2064,13 @@ var uniqueInOrder=function(iterable){
   }
   return uniqueArr;
 }
-
+console.log("----------------------------------------------")
 
 console.log(uniqueInOrder('AAAABBBCCDAABBB')) // == ['A', 'B', 'C', 'D', 'A', 'B']
 console.log(uniqueInOrder('ABBCcAD')    )     // == ['A', 'B', 'C', 'c', 'A', 'D']
 console.log(uniqueInOrder([1,2,2,3,3]) )      // == [1,2,3]
 
-
+console.log("----------------------------------------------")
 
 
 
@@ -2083,4 +2083,42 @@ async function sleep(millis) {
 }
  
  let t = Date.now()
- sleep(100).then(() => console.log(Date.now() - t)) // 100
+ //sleep(100).then(() => console.log(Date.now() - t)) // 100
+
+ console.log("----------------------------------------------")
+
+ //Problem Link https://leetcode.com/problems/roman-to-integer/submissions/
+ var romanToInt = function(s) {
+    
+    const romanNumerals = {
+      I: 1,
+      V: 5,
+      X: 10,
+      L: 50,
+      C: 100,
+      D: 500,
+      M: 1000
+    } 
+    let sum = 0;
+    const sArr = s.split("");
+    for (let i = 0; i < sArr.length; i++) {
+
+
+      if(romanNumerals[sArr[i]] < romanNumerals[sArr[i + 1]]){
+        sum += romanNumerals[sArr[i + 1]] - romanNumerals[sArr[i]]
+        i++
+      } else {
+        sum += romanNumerals[sArr[i]]
+      }
+     
+
+    }
+    return sum
+
+    
+ };
+
+console.log(romanToInt("IV"))
+console.log(romanToInt("MCMXCIV"))
+
+console.log("----------------------------------------------")
