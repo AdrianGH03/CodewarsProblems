@@ -2122,3 +2122,26 @@ console.log(romanToInt("IV"))
 console.log(romanToInt("MCMXCIV"))
 
 console.log("----------------------------------------------")
+//problem link : https://leetcode.com/problems/longest-common-prefix/
+
+var longestCommonPrefix = function(strs) {
+    if (strs.length === 0) {
+      return "";
+    }
+    let prefix = strs[0];
+    for (let i = 1; i < strs.length; i++) {
+      
+      while (strs[i].indexOf(prefix) !== 0) {
+        prefix = prefix.substring(0, prefix.length - 1);
+        if (prefix === "") {
+          return "";
+        }
+      }
+    }
+
+    return prefix;
+};
+//What this function basically does is cut away at the end of the first word, "flower" till it matches the beginning of the next word, "flow".
+// Once no mismatches are found, it moves onto the next word. If all words match, it returns the prefix. If not, it returns an empty string.
+
+console.log(longestCommonPrefix(["flower","flow","flight"])) 
