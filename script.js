@@ -2145,3 +2145,46 @@ var longestCommonPrefix = function(strs) {
 // Once no mismatches are found, it moves onto the next word. If all words match, it returns the prefix. If not, it returns an empty string.
 
 console.log(longestCommonPrefix(["flower","flow","flight"])) 
+
+console.log("----------------------------------------------")
+
+
+//Problem Link https://leetcode.com/problems/valid-parentheses/
+// Given a string s containing just the characters '(', ')', '{', '}', '[' and ']',
+//  determine if the input string is valid.
+
+// An input string is valid if:
+
+// Open brackets must be closed by the same type of brackets.
+// Open brackets must be closed in the correct order.
+// Every close bracket has a corresponding open bracket of the same type.
+
+
+var isValid = function(s) {
+  const sArr = s.split("");
+  var letterNumber = /^[0-9a-zA-Z]+$/;
+  var letterNumberAndBrackets = /^(?=.*[0-9a-zA-Z])(?=.*[\[\]{}()])[\[\]{}()0-9a-zA-Z ]+$/;
+  if (letterNumber.test(s) || letterNumberAndBrackets.test(s)) {
+    return false;
+  }
+
+  let bracketStack = [];
+  const bracketPairs = {
+    '[': ']',
+    '{': '}',
+    '(': ')',
+  };
+
+  for (let i = 0; i < sArr.length; i++) {
+    if (bracketPairs[sArr[i]]) {
+      bracketStack.push(sArr[i]);
+    } else if (bracketPairs[bracketStack.pop()] !== sArr[i]) {
+      return false;
+    }
+  }
+
+  return bracketStack.length === 0;
+};
+console.log(isValid('[](){}'))
+console.log(isValid('e()'))
+console.log(isValid('uhhh'))
