@@ -2247,3 +2247,45 @@ var intToRoman = function(num) {
 };
 
 console.log(intToRoman(1214));
+
+
+// Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+ 
+
+// Example 1:
+
+// Input: n = 3
+// Output: ["((()))","(()())","(())()","()(())","()()()"]
+// Example 2:
+
+// Input: n = 1
+// Output: ["()"]
+//problem link: https://leetcode.com/problems/generate-parentheses/ 
+
+var generateParenthesis = function(n) {
+  let parenthesesArray = []
+  let openParCount = 0;
+  let closeParCount = 0;
+  let currentString = "";
+
+  function generateParenthesesHelper(openParCount, closeParCount, currentString) {
+    if (openParCount === n && closeParCount === n) {
+      parenthesesArray.push(currentString);
+      return;
+    }
+
+    if (openParCount < n) {
+      generateParenthesesHelper(openParCount + 1, closeParCount, currentString + "(");
+    }
+
+    if (closeParCount < openParCount) {
+      generateParenthesesHelper(openParCount, closeParCount + 1, currentString + ")");
+    }
+  }
+  generateParenthesesHelper(openParCount, closeParCount, currentString);
+  return parenthesesArray;
+};
+
+console.log(generateParenthesis(3))
+console.log(generateParenthesis(1))
