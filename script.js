@@ -2251,7 +2251,7 @@ console.log(intToRoman(1214));
 
 // Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
 
- 
+console.log("----------------------------------------------")
 
 // Example 1:
 
@@ -2289,3 +2289,22 @@ var generateParenthesis = function(n) {
 
 console.log(generateParenthesis(3))
 console.log(generateParenthesis(1))
+console.log("----------------------------------------------")
+
+// Write a function that reverses a string. The input string is given as an array of characters s.
+
+// You must do this by modifying the input array in-place with O(1) extra memory.
+
+ 
+
+// Example 1:
+
+// Input: s = ["h","e","l","l","o"]
+// Output: ["o","l","l","e","h"]
+// problem link: https://leetcode.com/problems/reverse-string/  
+
+var reverseString = function(s) {
+    return Array.from(s).reverse().join("");
+};
+console.log(reverseString("Wassup"))
+console.log(reverseString("Mamacita"))
