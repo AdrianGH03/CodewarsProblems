@@ -2372,3 +2372,45 @@ var numJewelsInStones = function(jewels, stones) {
     return numberOfJewls.length
 };
 console.log(numJewelsInStones("aA", "aAAbbbb"))
+
+console.log("----------------------------------------------")
+
+// Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.
+
+// Each letter in magazine can only be used once in ransomNote.
+
+ 
+
+// Example 1:
+
+// Input: ransomNote = "a", magazine = "b"
+// Output: false
+// Example 2:
+
+// Input: ransomNote = "aa", magazine = "ab"
+// Output: false
+// Example 3:
+
+// Input: ransomNote = "aa", magazine = "aab"
+// Output: true
+//problem link: https://leetcode.com/problems/ransom-note/
+var canConstruct = function(ransomNote, magazine) {
+  const ransomArray = ransomNote.split("");
+  const magazineArray = magazine.split("");
+  
+  for (let i = 0; i < ransomArray.length; i++) {
+      const indexInMagazine = magazineArray.indexOf(ransomArray[i]);
+      if (indexInMagazine !== -1) {
+          ransomArray.splice(i, 1);
+          magazineArray.splice(indexInMagazine, 1);
+          i--;
+      } else {
+          return false;
+      }
+  }
+  return true;
+};
+console.log(canConstruct('aab', 'baa'))
+console.log(canConstruct('aa', 'aab'))
+console.log(canConstruct('a', 'b'))
+console.log(canConstruct('aa', 'ab'))
