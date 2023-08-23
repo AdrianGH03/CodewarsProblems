@@ -2414,3 +2414,5 @@ console.log(canConstruct('aab', 'baa'))
 console.log(canConstruct('aa', 'aab'))
 console.log(canConstruct('a', 'b'))
 console.log(canConstruct('aa', 'ab'))
+
+console.log("----------------------------------------------")
