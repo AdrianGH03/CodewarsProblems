@@ -2446,3 +2446,35 @@ var maxArea = function(height) {
 };
 
 console.log(maxArea([1,8,6,2,5,4,8,3,7]))
+
+console.log("----------------------------------------------")
+
+var combinationSum = function(candidates, target) {
+    const combinations = []
+    const combination = []
+    let index = 0;
+    
+    candidates.sort((a,b) => a-b );
+    combinationSumHelper(target, index);
+    function combinationSumHelper(target, index) {
+        if (target === 0) {
+            combinations.push([...combination]);
+            return;
+        }
+        
+        if (target < 0) {
+            return;
+        }
+        
+        for (let i = index; i < candidates.length; i++) {
+            combination.push(candidates[i]);
+            combinationSumHelper(target - candidates[i], i);
+            combination.pop();
+        }
+    }
+    return combinations;
+
+};
+
+console.log(combinationSum([2,3,6,7], 7))
+console.log(combinationSum([2,3,5],8))
