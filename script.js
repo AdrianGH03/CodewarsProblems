@@ -2478,3 +2478,11 @@ var combinationSum = function(candidates, target) {
 
 console.log(combinationSum([2,3,6,7], 7))
 console.log(combinationSum([2,3,5],8))
+
+console.log("----------------------------------------------")
+var getConcatenation = function(nums) {
+  const arr1 = nums
+  const arr2 = nums
+  return [...arr1, ...arr2]
+};  
+console.log(getConcatenation([1,2,1]))
