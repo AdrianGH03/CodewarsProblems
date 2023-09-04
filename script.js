@@ -2511,3 +2511,30 @@ var removeDuplicates = function(nums) {
 };
 console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
 console.log(removeDuplicates([1,1,2]))
+
+console.log("------------------------------------")
+
+var countAsterisks = function(s) {
+    let caArray = s.split("")
+    let extractedTextPairs = [];
+    let startIndex = 0;
+    let filteredSArr = []
+    
+    for(let i = 0; i < caArray.length; i++){
+      if(caArray[i] == '|'){
+        extractedTextPairs.push(caArray[i]);
+        startIndex = i;
+        i++;
+        while(caArray[i] !== '|'){
+          extractedTextPairs.push(caArray[i]);
+          i++;
+        }
+      } else if(caArray[i] != '|'){
+        filteredSArr.push(caArray[i])
+      }
+    }
+    
+    return filteredSArr.filter(value => value === '*').length
+};
+console.log(countAsterisks("l|*e*et|c**o|*de|"))
+console.log(countAsterisks("yo|uar|e**|b|e***au|tifu|l"))
