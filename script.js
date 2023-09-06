@@ -2538,3 +2538,16 @@ var countAsterisks = function(s) {
 };
 console.log(countAsterisks("l|*e*et|c**o|*de|"))
 console.log(countAsterisks("yo|uar|e**|b|e***au|tifu|l"))
+
+
+console.log("------------------------------------")
+
+//problem link: https://leetcode.com/problems/length-of-last-word/
+
+var lengthOfLastWord = function(s) {
+    const wordArr = s.split(" ").filter(value => value !== "");
+    return wordArr[wordArr.length - 1].length
+};
+
+console.log(lengthOfLastWord("   fly me   to   the moon  "))
+console.log(lengthOfLastWord("luffy is still joyboy"))
