@@ -2551,3 +2551,12 @@ var lengthOfLastWord = function(s) {
 
 console.log(lengthOfLastWord("   fly me   to   the moon  "))
 console.log(lengthOfLastWord("luffy is still joyboy"))
+
+console.log('------------------------------------')
+//problem link: https://leetcode.com/problems/return-length-of-arguments-passed/
+
+var argumentsLength = function(...args) {
+  return args.length;
+};
+
+console.log(argumentsLength(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
