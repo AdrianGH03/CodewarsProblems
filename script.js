@@ -2560,3 +2560,48 @@ var argumentsLength = function(...args) {
 };
 
 console.log(argumentsLength(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+console.log('------------------------------------')
+
+//problem link: https://leetcode.com/problems/rotate-image/
+
+function reverseArrayInPlace(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    // Swap elements at the left and right indices
+    const temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+
+    // Move the pointers towards each other
+    left++;
+    right--;
+  }
+}
+
+const myArray = [1, 2, 3, 4, 5];
+reverseArrayInPlace(myArray);
+console.log(myArray); // Output: [5, 4, 3, 2, 1]
+
+var rotate = function(matrix) {
+  const n = matrix.length;
+
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      
+      const temp = matrix[i][j];
+      matrix[i][j] = matrix[j][i];
+      matrix[j][i] = temp;
+    }
+  }
+
+  for (let i = 0; i < n; i++) {
+    matrix[i].reverse();
+  }
+
+  return matrix;
+};
+
+console.log(rotate([[1,2,3],[4,5,6],[7,8,9]]))
