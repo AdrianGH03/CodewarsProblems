@@ -2605,3 +2605,35 @@ var rotate = function(matrix) {
 };
 
 console.log(rotate([[1,2,3],[4,5,6],[7,8,9]]))
+
+console.log('------------------------------------')
+
+//problem link: https://leetcode.com/problems/sort-colors/
+
+var sortColors = function(nums) {
+    let left = 0;
+    let i = 0;
+    let right = nums.length - 1;
+
+    while (i <= right) {
+      if (nums[i] === 0) {
+          
+          [nums[i], nums[left]] = [nums[left], nums[i]];
+          left++;
+          i++;
+      } else if (nums[i] === 2) {
+          
+          [nums[i], nums[right]] = [nums[right], nums[i]];
+          right--;
+      } else {
+          i++;
+      }
+    }
+    
+    return nums
+};
+
+//basically going to the center one by one, swaping values on both left and right as you go. 
+// not exact one by one because sometimes its still stuck on same nums[i] or nums[right/left] value to use for comparison.
+
+console.log(sortColors([2,0,2,1,1,0]))
