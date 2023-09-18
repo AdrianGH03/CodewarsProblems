@@ -2637,3 +2637,28 @@ var sortColors = function(nums) {
 // not exact one by one because sometimes its still stuck on same nums[i] or nums[right/left] value to use for comparison.
 
 console.log(sortColors([2,0,2,1,1,0]))
+
+console.log('------------------------------------')
+
+var isPalindrome = function(x) {
+    const xToString = x.toString();
+    const xReversed = [...xToString].reverse().join("");
+    if(xToString === xReversed){
+      return true
+    }
+    return false
+
+};
+
+var isPalindromeNoString = function(x) {
+  const xSnapshot = x;
+  var revNumber = 0;
+  while (x > 0) {
+    revNumber = (revNumber * 10) + (x % 10);
+    x = Math.floor(x / 10);
+  }
+  return xSnapshot === revNumber;
+}
+
+console.log(isPalindrome(121))
+console.log(isPalindromeNoString(121))
