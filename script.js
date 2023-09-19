@@ -2640,6 +2640,8 @@ console.log(sortColors([2,0,2,1,1,0]))
 
 console.log('------------------------------------')
 
+//Problem link: https://leetcode.com/problems/palindrome-number/submissions/
+
 var isPalindrome = function(x) {
     const xToString = x.toString();
     const xReversed = [...xToString].reverse().join("");
@@ -2662,3 +2664,30 @@ var isPalindromeNoString = function(x) {
 
 console.log(isPalindrome(121))
 console.log(isPalindromeNoString(121))
+console.log('------------------------------------')
+
+var sumOfUnique = function(nums) {
+  let numCount = {}; 
+  
+  
+  for (let num of nums) {
+      if (numCount[num]) {
+          numCount[num]++;
+      } else {
+          numCount[num] = 1;
+      }
+  }
+
+  let sum = 0;
+
+  for (let num in numCount) {
+      if (numCount[num] === 1) {
+          sum += parseInt(num);
+      }
+  }
+
+  return sum;
+};
+
+console.log(sumOfUnique([1, 2,3,4,5])); 
+
