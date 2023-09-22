@@ -2691,3 +2691,20 @@ var sumOfUnique = function(nums) {
 
 console.log(sumOfUnique([1, 2,3,4,5])); 
 
+console.log('------------------------------------')
+
+//proble link:
+
+var shuffle = function(nums, n) {
+  const firstHalf = nums.splice(0, n);
+  const secondHalf = nums.splice(-n);
+  const newArr = []
+  for(let i = 0; i < n; i++){
+    newArr.push(firstHalf[i])
+    newArr.push(secondHalf[i])
+  }
+  return newArr
+    
+};
+
+console.log(shuffle([2,5,1,3,4,7], 3))
