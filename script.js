@@ -2585,6 +2585,10 @@ const myArray = [1, 2, 3, 4, 5];
 reverseArrayInPlace(myArray);
 console.log(myArray); // Output: [5, 4, 3, 2, 1]
 
+console.log('------------------------------------')
+
+//problem link: https://leetcode.com/problems/rotate-image/
+
 var rotate = function(matrix) {
   const n = matrix.length;
 
@@ -2666,6 +2670,8 @@ console.log(isPalindrome(121))
 console.log(isPalindromeNoString(121))
 console.log('------------------------------------')
 
+//problem link: https://leetcode.com/problems/valid-palindrome-ii/
+
 var sumOfUnique = function(nums) {
   let numCount = {}; 
   
@@ -2693,7 +2699,7 @@ console.log(sumOfUnique([1, 2,3,4,5]));
 
 console.log('------------------------------------')
 
-//proble link:
+//proble link: https://leetcode.com/problems/shuffle-the-array/submissions/
 
 var shuffle = function(nums, n) {
   const firstHalf = nums.splice(0, n);
