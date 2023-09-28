@@ -2714,3 +2714,46 @@ var shuffle = function(nums, n) {
 };
 
 console.log(shuffle([2,5,1,3,4,7], 3))
+
+console.log('------------------------------------')
+
+var isStrictlyPalindromic = function(n) {
+
+    for(let b = 2; b <= n - 2; b++){
+      let quotient = n;
+      const representation = [];
+      
+      
+      while (quotient > 0) {
+          const remainder = quotient % b;
+          representation.unshift(remainder); 
+          quotient = Math.floor(quotient / b);
+      }
+
+      if(!isPalindrome(representation)){
+        return false;
+      }
+    }
+
+    function isPalindrome(arr) {
+      for(let i = 0; i < arr.length / 2; i++){
+        if(arr[i] != arr[arr.length - 1 - i]){
+          return false;
+        }
+        else {
+          return true;
+        }
+      }
+    }
+};
+
+console.log(isStrictlyPalindromic(9))
+
+console.log('------------------------------------')
+
+var defangIPaddr = function(address) {
+  return [...address].map((value) => value === "." ? 
+    value.replace(".", "[.]") : value
+  ).join("");
+};
+console.log(defangIPaddr("255.100.50.0"))
