@@ -2757,3 +2757,21 @@ var defangIPaddr = function(address) {
   ).join("");
 };
 console.log(defangIPaddr("255.100.50.0"))
+
+console.log('------------------------------------')
+
+
+//prob link : https://leetcode.com/problems/rearrange-array-elements-by-sign/
+
+var minPartitions = function(n) {
+  let minPart = 0;
+  const nArr = n.toString().split("");
+  for(let i = 0; i < nArr.length ; i++){
+      const number = Number(nArr[i]);
+      
+      minPart = Math.max(minPart, number)
+  }
+  return minPart
+};
+
+console.log(minPartitions(32))
