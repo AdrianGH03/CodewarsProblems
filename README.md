@@ -1,2 +1,2 @@
 # CodewarsProblems
-A collection of all the code-wars problems I solved.
+A collection of all the code-wars/leetcode problems I solved.
