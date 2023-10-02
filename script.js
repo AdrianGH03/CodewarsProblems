@@ -2775,3 +2775,21 @@ var minPartitions = function(n) {
 };
 
 console.log(minPartitions(32))
+
+console.log('------------------------------------')
+
+
+// prob link : 
+
+var restoreString = function(s, indices) {
+    let shuffledArr = []
+
+    for (let i = 0; i < indices.length; i++) {
+      const index = indices[i]; 
+      shuffledArr[index] = s[i]; 
+    }
+
+    return shuffledArr.join("")
+};
+
+console.log(restoreString("codeleet", [4,5,6,7,0,2,1,3]))
