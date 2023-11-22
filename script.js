@@ -2793,3 +2793,106 @@ var restoreString = function(s, indices) {
 };
 
 console.log(restoreString("codeleet", [4,5,6,7,0,2,1,3]))
+
+console.log('-------------------')
+
+// Given a string s which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.
+// Letters are case sensitive, for example, "Aa" is not considered a palindrome here.
+
+
+// Example 1:
+
+// Input: s = "abccccdd"
+// Output: 7
+// Explanation: One longest palindrome that can be built is "dccaccd", whose length is 7.
+// Example 2:
+
+// Input: s = "a"
+// Output: 1
+// Explanation: The longest palindrome that can be built is "a", whose length is 1.
+var longestPalindrome = function(s) {
+  const charCount = new Map();
+
+  
+  for (const char of s) {
+      charCount.set(char, (charCount.get(char) || 0) + 1);
+  }
+
+  let length = 0;
+  let hasOddCount = false;
+
+  // Calculate the length of the longest palindrome
+  for (const count of charCount.values()) {
+      length += Math.floor(count / 2) * 2; 
+      if (count % 2 === 1) {
+          hasOddCount = true;
+      }
+  }
+
+  if (hasOddCount) {
+      length += 1;
+  }
+
+  return length;
+};
+
+console.log(longestPalindrome("abccccdd"))
+
+console.log("-------------")
+
+// Assume that the board comes in the form of a 3x3 array, where the value is 0 if a spot is empty, 1 if it is an "X", or 2 if it is an "O", like so:
+
+// [[0, 0, 1],
+//  [0, 1, 2],
+//  [2, 1, 0]]
+// We want our function to return:
+
+// -1 if the board is not yet finished AND no one has won yet (there are empty spots),
+// 1 if "X" won,
+// 2 if "O" won,
+// 0 if it's a cat's game (i.e. a draw).
+// You may assume that the board passed in is valid in the context of a game of Tic-Tac-Toe.
+
+function isSolved(board) {
+  
+  for(let i=0; i < 3; i++){
+    if(board[i][0] == board[i][1] && board[i][1] == board[i][2]){
+      if(board[i][0] !== 0){
+        return board[i][0]
+      } 
+    } else if(board[0][i] == board[1][i] && board[1][i] == board[2][i]){
+      if(board[0][i] !== 0){
+        return board[0][i]
+      } 
+    }
+  }
+
+  if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+    if (board[0][0] !== 0) {
+        return board[0][0]; 
+    }
+  }
+
+  if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+      if (board[0][2] !== 0) {
+          return board[0][2]; 
+      }
+  }
+
+  
+  for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+          if (board[i][j] === 0) {
+              return -1; 
+          }
+      }
+  }
+
+  return 0; 
+  
+}
+
+console.log(isSolved([[1,1,2],
+                     [2,2,0],
+                     [2,0,1]]
+  ))
