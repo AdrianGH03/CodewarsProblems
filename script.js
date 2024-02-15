@@ -2896,3 +2896,55 @@ console.log(isSolved([[1,1,2],
                      [2,2,0],
                      [2,0,1]]
   ))
+
+
+console.log("------------------------")
+
+// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+// You can return the answer in any order.
+
+ 
+
+// Example 1:
+
+// Input: nums = [2,7,11,15], target = 9
+// Output: [0,1]
+// Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Example 2:
+
+// Input: nums = [3,2,4], target = 6
+// Output: [1,2]
+// Example 3:
+
+// Input: nums = [3,3], target = 6
+// Output: [0,1]
+
+
+  nums = [3,2,4]
+  target = 6
+  
+  //Think of it like this, for every number in the array there will be another number that will make it reach target once added
+  // x + y = target now changes to y = target - x
+  //Tutorial how brute force O(n^2), a while loop, becomes O(n) with a hashmap
+  // https://www.youtube.com/watch?time_continue=290&v=luicuNOBTAI&embeds_referring_euri=https%3A%2F%2Fleetcode.com%2F&source_ve_path=MTM5MTE3LDI4NjYzLDEzNzcyMSwxMzkxMTcsMTM5MTE3LDEzOTExNywyMzg1MQ&feature=emb_title
+
+  var twoSum = function(nums, target) {
+    
+    const pairs = {}; //Hashmap
+    for(i = 0; i < nums.length; i++){
+      var difference = target - nums[i]
+      if (difference in pairs){
+        return [pairs[difference], i]
+      } else {
+        pairs[nums[i]] = i
+      }
+      
+    }
+  };
+
+  console.log(twoSum(nums, target))
+
+
