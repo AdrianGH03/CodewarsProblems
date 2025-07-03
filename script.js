@@ -2952,7 +2952,6 @@ console.log("------------------------")
 var removeElement = function(nums, val) {
     let count = 0
     for(let i = 0; i < nums.length; i++){
-      console.log("i is "+nums[i]+" "+nums)
         if(nums[i] == val){
             nums.splice(i, 1)
             i--
@@ -2968,4 +2967,276 @@ var removeElement = function(nums, val) {
 console.log(removeElement([3,2,2,3], 3)) //Output: 2, nums = [2,2]
 console.log(removeElement([0,1,2,2,3,0,4,2], 2)) //Output: 5, nums = [0,1,3,0,4]
 
+console.log('------------------------------')
 
+var isValidSudoku = function(board) {
+    //Row
+    for(let i = 0; i < board.length; i++){
+      let newArr = board[i].filter(index => index != ".")
+      if(new Set(newArr).size != newArr.length){
+        return false
+      } 
+    }
+
+    //Column
+    for(let column = 0; column < board.length; column++){
+      let columns = new Set()
+      for(let j = 0; j < board.length; j++){
+        if(!columns.has(board[j][column])){
+          columns.add(board[j][column])
+        } else if (board[j][column] == ".") {
+          continue
+        } else {
+          return false
+        }
+      }
+    }
+
+    //Box
+    const boxes = {}
+    for(let row = 0; row < board.length; row++){
+      for(let column = 0; column < board.length; column++){
+        
+        let boxKey = `${Math.floor(row/3)}-${Math.floor(column/3)}`;
+        if (!boxes[boxKey]) {
+          boxes[boxKey] = new Set(); 
+        } 
+        if(board[row][column] == "."){
+          continue
+        } else if (boxes[boxKey].has(board[row][column])){
+          return false
+        }
+        boxes[boxKey].add(board[row][column])
+
+      }
+    }
+    return true
+        
+
+};
+
+console.log(isValidSudoku([["5","3",".",".","7",".",".",".","."],
+                           ["6",".",".","1","9","5",".",".","."],
+                           ["1","9","8",".",".",".",".","6","."],
+                           ["8",".",".",".","6",".",".",".","3"],
+                           ["4",".",".","8",".","3",".",".","1"],
+                           ["7",".",".",".","2",".",".",".","6"],
+                           [".","6",".",".",".",".","2","8","5"],
+                           [".",".",".","4","1","9",".",".","."],
+                           [".",".",".",".","8",".",".","7","9"]]))
+
+console.log('------------------------------')
+
+var threeSum = function(nums) {
+    let triplets = []
+    let sortNums = nums.sort((a,b) => a-b)
+    //[-1,0,1,2,-1,-4]
+    //[-4,-1,-1,0,1,2]
+
+    for(let i = 0; i < sortNums.length; i++){
+      let right = sortNums.length - 1
+      let left = i+1
+      let sum = 0;
+
+      if(sortNums[i] == sortNums[i-1] && i > 0){
+        continue
+      }
+
+      while(right > left){
+        sum = sortNums[i] + sortNums[left] + sortNums[right]
+        if(sum > 0){
+          right--
+        } else if (sum < 0){
+          left++
+        } else {
+          triplets.push([sortNums[i], sortNums[left], sortNums[right]])
+          right--
+          left++
+          while(left < right && sortNums[left] == sortNums[left-1]){
+            left++
+          }
+          while(left < right && sortNums[right] == sortNums[right+1]){
+            right--
+          }
+        }
+      }
+
+
+    }
+    return triplets
+
+    // for(let i = 0; i < nums.length; i++){
+    //   let sum;
+
+    //   for(let j = 1; j < nums.length; j++){
+    //     if(i == j){
+    //       continue
+    //     }
+    //     sum = nums[i] + nums[j]
+    //     for(let k = 2; k < nums.length; k++){
+    //       if((i == k) || (j == k)){
+    //         continue
+    //       }
+    //       sum = nums[i] + nums[j] + nums[k]
+    //       if(sum == 0){
+    //         triplets.push([nums[i], nums[j], nums[k]].sort((a,b) => a-b))
+    //         console.log([nums[i], nums[j], nums[k]].sort((a,b) => a-b))
+    //       }
+    //     }
+    //   }
+    // }
+
+    // return Array.from(new Set(triplets.map(triplet => triplet.join(',')))).map(str => str.split(',').map(Number))
+};
+
+console.log(threeSum([-1,0,1,2,-1,-4]))
+console.log('------------------------------')
+
+var threeSumClosest = function(nums,target) {
+    let sortNums = nums.sort((a,b) => a-b)
+    let closestNumber = sortNums[0] + sortNums[1] + sortNums[2]
+
+    for(let i = 0; i < sortNums.length; i++){
+      let right = sortNums.length - 1
+      let left = i+1
+      let sum = 0;
+
+      while(right > left){
+        sum = sortNums[i] + sortNums[left] + sortNums[right]
+        if (Math.abs(sum - target) < Math.abs(closestNumber - target)){
+          closestNumber = sum
+        } 
+
+        if(sum > target){
+          right--
+        } else if (sum < target){
+          left++
+        } else {
+          right--
+          left++
+        }
+      }
+
+
+    }
+    return closestNumber
+}
+
+console.log(threeSumClosest([-1,2,1,-4], 1))
+console.log(threeSumClosest([2,3,8,9,10], 16))
+
+console.log('------------------------------')
+
+var fourSum = function(nums, target) {
+    let sortNums = nums.sort((a,b)=>a-b)
+    let fourDistinct = []
+    //[2,2,2,2,2]
+
+    for(let i = 0; i < sortNums.length; i++){
+      
+      let sum;
+      if(sortNums[i] == sortNums[i-1]){
+        continue
+      }
+
+      for(let j = i+1; j < sortNums.length; j++){
+        let left = j+1
+        let right = sortNums.length - 1
+        if(sortNums[j] == sortNums[j-1] && j > i + 1){
+          continue
+        }
+
+        while(left < right){
+          sum = sortNums[i] + sortNums[left] + sortNums[j] + sortNums[right]
+          if(sum > target){
+            right--
+          } else if (sum < target){
+            left++
+          } else {
+            fourDistinct.push([sortNums[i], sortNums[left], sortNums[j], sortNums[right]])
+            right--
+            left++
+            
+            while(left < right && sortNums[left] == sortNums[left-1]){
+              left++
+            }
+            while(left < right && sortNums[right] == sortNums[right+1]){
+              right--
+            }
+            
+          }
+        }
+      }
+    }
+
+    return fourDistinct
+};
+
+console.log(fourSum([2,2,2,2,2], 8)) //[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+console.log('------------------------------')
+
+var searchInsert = function(nums, target) {
+    if(nums.includes(target)){
+        return nums.indexOf(target)
+    } else {
+        nums.push(target)
+    }
+    let newArr = nums.sort((a,b) => a-b)
+    return newArr.indexOf(target)
+};
+
+console.log(searchInsert([1,3,5,6],7))
+console.log('------------------------------')
+
+var nextPermutation = function(nums) {
+    let i = nums.length - 2;
+    // Find the first decreasing element from the end
+    while (i >= 0 && nums[i] >= nums[i + 1]) {
+        i--;
+    }
+    if (i >= 0) {
+        // Find the next bigger element to swap with
+        let j = nums.length - 1;
+        while (nums[j] <= nums[i]) {
+            j--;
+        }
+        // Swap
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+    // Reverse the rest
+    let left = i + 1, right = nums.length - 1;
+    while (left < right) {
+        [nums[left], nums[right]] = [nums[right], nums[left]];
+        left++;
+        right--;
+    }
+};
+
+console.log(nextPermutation([1,2,3]))
+console.log(nextPermutation([3,2,1]))
+console.log('------------------------------')
+
+const arrr1 = [1,2,3]
+const arrr2 = [4,5,6]
+console.log([...arrr1,...arrr2])
+
+function filterJobAds(jobAds, requiredKeywords) {
+  let filter = []
+  for(let i = 0; i < jobAds.length; i++){
+    if(requiredKeywords.every(keyword => jobAds[i].keywords.includes(keyword))){
+      filter.push(jobAds[i])
+    }
+  }
+  
+  return filter
+}
+
+const jobAds = [
+  { title: "Frontend Dev", keywords: ["React", "JavaScript"] },
+  { title: "Backend Dev", keywords: ["Java", "Spring Boot"] },
+  { title: "Full Stack", keywords: ["React", "Node.js", "MongoDB"] }
+];
+
+let testt = filterJobAds(jobAds, ["React", "JavaScript"])
+console.log(testt)
+console.log('------------------------------')
