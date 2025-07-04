@@ -3240,3 +3240,291 @@ const jobAds = [
 let testt = filterJobAds(jobAds, ["React", "JavaScript"])
 console.log(testt)
 console.log('------------------------------')
+
+var plusOne = function(digits) {
+    for(let i = digits.length - 1; i >= 0; i--){
+      let sum = digits[i]+1
+      if(sum == 10){
+        digits[i] = 0
+      } else {
+        digits[i] += 1
+        return digits
+      }
+    }
+    
+    digits.unshift(1)
+    return digits
+};
+
+console.log(plusOne([9,9,9,9,9]))
+console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,0,0,0]))
+                    //[6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,0,0,0]
+console.log('------------------------------')
+
+// var merge = function(nums1, m, nums2, n) {
+//     let firstValue = 0
+//     for(let i = 0; i < m+n; i++){
+//       if(i >= m){
+//         nums1[i] = nums2[firstValue]
+//         firstValue++
+//       } 
+//     }
+  
+//     return nums1.sort((a,b) => a-b)
+// };
+
+var merge = function(nums1, m, nums2, n) {
+    let i = m - 1;         // last index of nums1's initial part
+    let j = n - 1;         // last index of nums2
+    let k = m + n - 1;     // last index of nums1 (total length)
+
+    while (j >= 0) {
+        if (i >= 0 && nums1[i] > nums2[j]) {
+            nums1[k] = nums1[i];
+            i--;
+        } else {
+            nums1[k] = nums2[j];
+            j--;
+        }
+        k--;
+    }
+    return nums1;
+};
+
+console.log(merge([1,2,3,0,0,0], 3, [2,5,6],3))
+console.log(merge([1], 1, [],0))
+console.log(merge([0], 0, [1],1))
+console.log('------------------------------')
+
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+var sortedArrayToBST = function(nums) {
+    //find root nums.length - 1 / 2
+    // find recursive root of left by root index / 2
+    //find recursive root of left by slicing start of array by root, find right by slicing root by end of array
+    if(nums.length == 0){
+      return null
+    }
+    let root = Math.floor((nums.length)/ 2)
+    let mid = new TreeNode(nums[root])
+    mid.left = sortedArrayToBST(nums.slice(0, root))
+    mid.right = sortedArrayToBST(nums.slice(root+1))
+
+    return mid
+
+  
+
+  
+};
+
+console.log(sortedArrayToBST([-10,-3,0,5,9]))
+console.log('------------------------------')
+
+var generate = function(numRows) {
+    //size of array need to grow to reach numRows
+    //if size of previous array is >= 2, start at index 0 and add two numbers to put in next array, 
+    //     increase index by 1 to get next 2 numbers if maxRowSize hasn't been reached
+    //add a 1 to the end if max row size has been reached, then begin next row until numRows is reached.
+    let arr = [[1]]
+    
+    while(arr.length < numRows){
+      for(let i = 0; i < numRows-1; i++){
+        let subArr = [1]
+        
+        for (let j = 0; j < arr[i].length - 1; j++) {
+            let sum = arr[i][j] + arr[i][j + 1];
+            subArr.push(sum);
+        }
+        subArr.push(1);
+        arr.push(subArr)
+      }
+    }
+
+    return arr
+
+};
+
+console.log(generate(5))
+console.log('------------------------------')
+function reverseArray(a) {
+    // Write your code here
+    let left = 0
+    let right = a.length - 1
+    while (left < right) {
+        let temp = a[left];
+        a[left] = a[right];
+        a[right] = temp;
+        left++;
+        right--;
+    }
+    return a
+}
+console.log(reverseArray([1,2,3,4,5])) //2,1 to 2,3,1 to 2,3,4,1 to 2,3,4,5,1
+console.log('------------------------------')
+
+function hourglassSum(arr) {
+    // Write your code here
+    //for every array, goes through pairs of 3
+    //top row = currentArr 3-element pair
+    //middle number intially set to currentArr[i+1][position], position initially set to 1 and add 1 each time you move. i.e 1, 2, 3, 4 on each loop
+    //bottom row = currentArr[i+2] 3-element pair
+    //need something to track array and then something to track position in that array, so two for loops
+    // we also move 3 times vertically and horizontally
+    let maxSum = -Infinity
+    
+    for(let i = 0; i < arr.length - 2; i++){ //increase current array in arr
+      for(let j = 0; j < 4; j++){ //increase position in the current array in arr
+        let pos = j+1
+        let topNum = arr[i].slice(j, j+3)
+        let middleNum = arr[i+1][pos]
+        let botNum = arr[i+2].slice(j, j+3)
+        
+        let sumArr = []
+        sumArr = [...topNum, middleNum, ...botNum]
+        let sum = sumArr.reduce((a, b) => a + b, 0);
+        if(sum > maxSum){
+          maxSum = sum;
+        }
+        
+      }
+    }
+
+    return maxSum
+}
+const arrey = [
+  [-9, -9, -9,  1, 1, 1],
+  [ 0, -9,  0,  4, 3, 2],
+  [-9, -9, -9,  1, 2, 3],
+  [ 0,  0,  8,  6, 6, 0],
+  [ 0,  0,  0, -2, 0, 0],
+  [ 0,  0,  1,  2, 4, 0]
+];
+console.log(hourglassSum(arrey))
+console.log('------------------------------')
+var removeDuplicatess = function(nums) {
+    nums.sort((a,b) => a-b)
+    if (nums.length === 0) {
+      return 0;
+    }
+    let k = 1
+    for(let i = 1; i < nums.length; i++){
+      if(nums[i] != nums[i - 1]){
+        nums[k] == nums[i]
+        k++
+      }
+    }
+
+
+return k;
+};
+
+console.log(removeDuplicatess([1,1,2]))
+console.log('------------------------------')
+
+var twoSum = function(nums, target) {
+    // for each number in nums
+    //     check if number plus any other number equals target
+    //         check left of number, left is i-1, increment.
+    //         check right of number, right is end of array, decrement.
+    let hashMap = {}
+    for(let i = 0; i < nums.length; i++){
+      let diff = target - nums[i]
+      if(hashMap.hasOwnProperty(diff)){
+        return [nums.indexOf(diff), i]
+      } else {
+        hashMap[nums[i]] = i
+      }
+    }
+
+    
+};
+
+console.log(twoSum([2,7,5,15,3], 9))
+console.log(twoSum([3,2,4], 6))
+console.log('------------------------------')
+
+
+var removeElement = function(nums, val) {
+    let count = 0
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i] != val){
+            nums[count] = nums[i]
+            count++
+        } 
+        
+    }
+
+    return count
+};
+
+
+console.log(removeElement([1,4,3,4,5,6,4], 4))
+console.log('------------------------------')
+
+var moveZeroes = function(nums) {
+    let position = 0
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i] !== 0){
+            nums[position] = nums[i]
+            position++
+        }
+    }
+
+    for(let i = position; i < nums.length; i++){
+        nums[i] = 0
+    }
+
+    return nums
+};
+
+
+console.log(moveZeroes([0,1,0,3,12]))
+console.log('------------------------------')
+
+var canConstruct = function(ransomNote, magazine) {
+    // let aCount = {}
+    // for(let i = 0; i < magazine.length; i++){
+    //   if(aCount.hasOwnProperty(magazine[i])){
+    //     aCount[magazine[i]] += 1
+    //   } else {
+    //     aCount[magazine[i]] = 1
+    //   }
+    // }
+
+    // let count = 0
+    // ransomNote.split("").forEach((letter) => {
+    //   if(aCount.hasOwnProperty(letter) && aCount[letter] > 0){
+    //     count++
+    //     aCount[letter]-- 
+    //   }
+    // })
+
+    // return count == ransomNote.length
+
+    let aCount = {};
+    for (let i = 0; i < magazine.length; i++) {
+        if (aCount.hasOwnProperty(magazine[i])) {
+            aCount[magazine[i]] += 1;
+        } else {
+            aCount[magazine[i]] = 1;
+        }
+    }
+
+    for (let i = 0; i < ransomNote.length; i++) {
+        let letter = ransomNote[i];
+        if (!aCount[letter]) {
+            return false;
+        }
+        aCount[letter]--;
+    }
+
+    return true;
+};
+
+console.log(canConstruct("abbcag", "abbcaggg"))
