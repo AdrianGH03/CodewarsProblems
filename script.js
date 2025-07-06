@@ -3528,3 +3528,260 @@ var canConstruct = function(ransomNote, magazine) {
 };
 
 console.log(canConstruct("abbcag", "abbcaggg"))
+
+console.log('------------------------------')
+var firstUniqChar = function(s) {
+    let sMap = {}
+
+    for(let i = 0; i < s.length; i++){
+        if(sMap.hasOwnProperty(s[i])){
+          sMap[s[i]] += 1
+        } else {
+          sMap[s[i]] = 1
+        }
+    }
+
+    for(let i = 0; i < s.length; i++){
+        if(sMap[s[i]] == 1){
+          return i
+        } 
+    }
+
+    return -1
+};
+
+console.log(firstUniqChar('aabb'))
+console.log('------------------------------')
+
+var isAnagram = function(s, t) {
+    if(s.length != t.length){
+      return false
+    }
+    let sObj = {}
+    for(let i = 0; i < s.length; i++){
+        if(!sObj.hasOwnProperty(s[i])){
+            sObj[s[i]] = 1
+        } else {
+            sObj[s[i]] += 1
+        }
+    }
+
+    for(let i = 0; i < t.length; i++){
+        if(sObj.hasOwnProperty(t[i]) && sObj[t[i]] > 0){
+            sObj[t[i]]--
+        } else {
+            return false
+        }
+    }
+
+    return true
+};
+
+console.log(isAnagram('ab', 'a'))
+console.log('------------------------------')
+
+var isValid = function(s) {
+    let mp = {
+        "[": "]",
+        "(": ")",
+        "{": "}",
+    }
+    let stack = []
+
+    for(let i = 0; i < s.length; i++){
+        
+        if(mp.hasOwnProperty(s[i])){
+            stack.push(s[i])
+        } else if (mp[stack[stack.length - 1]] == s[i]){
+            stack.pop()
+        } else {
+          return false
+        }
+        
+    }
+
+    return stack.length > 0 ? false : true
+};
+
+console.log(isValid('('))
+console.log('------------------------------')
+
+// var isPalindrome = function(s) {
+//     //clean the string
+//     //reverse the string
+//     //is the string reversed the same as the string
+//     // true = yes , false = no
+
+//     s = s.toLowerCase().replace(/[^a-z0-9]/gi, "")
+//     let sAlph = []
+//     for(let i = 0; i < s.length; i++){
+//       if(!isNaN(s[i]) || s[i].match(/[a-z]/i)){
+//         sAlph.push(s[i])
+//       }
+//     }
+
+//     let revArr = []
+//     for(let i = sAlph.length-1; i >= 0; i--){
+//        revArr.push(sAlph[i])
+      
+//     }
+
+//     return revArr.toString() == sAlph.toString() ? true : false
+
+    
+// };
+var isPalindrome = function(s) {
+    s = s.toLowerCase().replace(/[^a-z0-9]/gi, "");
+    let rev = s.split("").reverse().join("");
+    return s === rev;
+};
+
+console.log(isPalindrome('racecar'))
+console.log('------------------------------')
+
+var strStr = function(haystack, needle) {
+    //two for loops, start building at each letter
+    //second for loop checks letter and starts building, comparing against needle for in order
+    //if not in order, break early so next letter (i) starts building
+    //if less than n length of needle number of elements exists, just return -1
+    for(let i = 0; i < haystack.length; i++){
+        let completeWordLength = needle.length
+        let subArr = haystack.substring(i, i+completeWordLength)
+        if(subArr == needle){
+          return i
+        }
+    }
+
+    return -1
+};
+
+console.log(strStr('hello', 'll'))
+console.log('------------------------------')
+var romanToInt = function(s) {
+    let numbers = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000,
+        'IX': 9,
+        'IV': 4,
+        'XC': 90,
+        'XL': 40,
+        'CD': 400,
+        'CM': 900,
+    }
+
+    let sum = 0
+    for(let i = 0; i < s.length; i++){
+        let number = numbers[s[i]]
+        if(numbers.hasOwnProperty(s[i].concat(s[i+1]))){
+          number = numbers[s[i].concat(s[i+1])]
+          i++
+        }
+        sum += number
+    }
+
+    return sum
+};
+
+console.log(romanToInt('MDCCCLXXXIV'))
+
+// Definition for singly-linked list node:
+function ListNode(val, next = null) {
+    this.val = val;
+    this.next = next;
+}
+
+
+var mergeTwoLists = function(list1, list2) {
+    let dummy = new ListNode(-1);
+    let current = dummy;
+
+    while(list1 && list2){
+      if(list1.val < list2.val){
+        current.next = list1
+        list1 = list1.next
+      } else {
+        current.next = list2
+        list2 = list2.next
+      }
+      current = current.next
+      
+    }
+
+
+    current.next = list1 ? list1 : list2;
+
+    return dummy.next;
+};
+
+console.log(mergeTwoLists([1,2,3],[4,3,1]))
+console.log('----------------------------')
+
+function plusMinus(arr) {
+    // Write your code here
+    let pos = 0;
+    let neg = 0;
+    let zero = 0;
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i] > 0){
+            pos++
+        } else if (arr[i] < 0){
+            neg++
+        } else {
+            zero++
+        }
+    }
+    
+    return console.log(
+        (pos/arr.length).toFixed(6)+"\n"+ 
+        (neg/arr.length).toFixed(6)+"\n"+ 
+        (zero/arr.length).toFixed(6)+"\n" 
+    )
+
+}
+
+plusMinus([-4, 3, -9, 0, 4, 1])
+
+
+function miniMaxSum(arr) {
+    arr.sort((a, b) => a - b);
+    let min = 0;
+    let max = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (i < 4){
+           min += arr[i];
+        }
+        if (i > 0) {
+          max += arr[i];
+        }
+    }
+    
+    return min + " " + max;
+}
+
+console.log(miniMaxSum([1,2,3,4,5])) //1,2,3,4,5
+
+
+function timeConversion(s) {
+    // Write your code here
+    //check the end for am or pm
+    // pm = add 12, am, just add the hour 0+original hour, if no og hr , its 0 i.e. 12 am
+    let timeOfDay = s.slice(s.length-2)
+    let areaOfTime = parseInt(s.slice(0, 2));
+    
+    if(timeOfDay == "PM" && areaOfTime != 12){
+      areaOfTime += 12
+    } else if (timeOfDay == 'AM' && areaOfTime == 12){
+      areaOfTime = 0
+    }
+
+    return areaOfTime.toString().padStart(2, '0') + s.slice(2, -2);
+    
+}
+
+
+console.log(timeConversion('05:00:00PM'))
