@@ -3785,6 +3785,58 @@ function timeConversion(s) {
 
 
 console.log(timeConversion('05:00:00PM'))
-const encoded = "aHR0cHM6Ly90bnM0bHBnbXppaXlwbnh4emVsNXNzNW55dTBuZnRvbC5sYW1iZGEtdXJsLnVzLWVhc3QtMS5vbi5hd3MvcmFtcC1jaGFsbGVuZ2UtaW5zdHJ1Y3Rpb25zLw==";
-const decoded = atob(encoded);
-console.log(decoded);
+console.log("---------------------------------------")
+
+var productExceptSelf = function(nums) { //Study this                                                           !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    let length = nums.length
+    let left = Array(length)
+    let right = Array(length)
+
+    left[0] = 1
+    for(let i = 1; i < length; i++){
+        left[i] = nums[i-1] * left[i-1]
+    }
+
+    right[length-1] = 1;
+    for(let i=length-2; i >= 0; i--){
+        right[i] = nums[i+1] * right[i+1]
+    }
+
+    let answer = Array(length)
+    for(let i=0; i < length; i++){
+        answer[i] = left[i] * right[i]
+        
+    }
+
+    return answer;
+    
+};
+
+console.log(productExceptSelf([-1,1,0,-3,3]))
+console.log("---------------------------------------")
+
+
+//Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.
+function encode(strs) {
+    if(strs.length == 0){
+        return "<empty>"
+    }
+    return strs.join('<|>');
+}
+
+/**
+ * @param {string} str
+ * @returns {string[]}
+ */
+function decode(str) {
+    if(str === "<empty>"){
+        return [];
+    }
+    return str.split('<|>');
+}
+let array = [""];
+let array2 = []
+console.log(encode(array));
+console.log(decode(encode(array)));
+console.log(encode(array2));
+console.log(decode(encode(array2)));
