@@ -3840,3 +3840,55 @@ console.log(encode(array));
 console.log(decode(encode(array)));
 console.log(encode(array2));
 console.log(decode(encode(array2)));
+console.log("---------------------------------------")
+
+
+function twoSum(nums, target) {
+    const numSet = {};
+    for (let index = 0; index < nums.length; index++) {
+        const num = nums[index];
+        const diff = target - num;
+        if (diff in numSet) {
+            return [index, numSet[diff]];
+        }
+        numSet[num] = index;
+    }
+}
+
+console.log(twoSum([1,3,4,5,2,1], 7))
+console.log("---------------------------------------")
+
+// Q How many numbers are less than the current number solutions
+function smallerNumbersThanCurrent(nums) {
+    const numless = [];
+    const temp = [...nums].sort((a, b) => a - b);
+    const d = {};
+    for (let index = 0; index < temp.length; index++) {
+        const num = temp[index];
+        if (!(num in d)) {
+            d[num] = index;
+        }
+    }
+    for (const num of nums) {
+        numless.push(d[num]);
+    }
+    return numless;
+}
+
+console.log(smallerNumbersThanCurrent([1,5,3,4,2,1]))
+
+console.log("---------------------------------------")
+// Q Minimum time visiting all points in a 2d graph solutions
+function minTimeToVisitAllPoints(points) {
+    let seconds = 0;
+    for (let i = 0; i < points.length - 1; i++) {
+        const xi_diff = points[i + 1][0] - points[i][0];
+        const xy_diff = points[i + 1][1] - points[i][1];
+        const x = Math.abs(xi_diff);
+        const y = Math.abs(xy_diff);
+        seconds += Math.max(x, y);
+    }
+    return seconds;
+}
+console.log(minTimeToVisitAllPoints([1,1], [3,-2]))
+console.log("---------------------------------------")
