@@ -3834,12 +3834,12 @@ function decode(str) {
     }
     return str.split('<|>');
 }
-let array = [""];
-let array2 = []
-console.log(encode(array));
-console.log(decode(encode(array)));
-console.log(encode(array2));
-console.log(decode(encode(array2)));
+// let array = [""];
+// let array2 = []
+// console.log(encode(array));
+// console.log(decode(encode(array)));
+// console.log(encode(array2));
+// console.log(decode(encode(array2)));
 console.log("---------------------------------------")
 
 
@@ -3892,3 +3892,29 @@ function minTimeToVisitAllPoints(points) {
 }
 console.log(minTimeToVisitAllPoints([1,1], [3,-2]))
 console.log("---------------------------------------")
+
+function isValidd(s) {
+        if(s.length == 1){
+          return false
+        }
+        let stack = []
+        let pairs = {
+            "(": ")",
+            "[": "]",
+            "{": "}"
+        }
+        for(let i = 0; i < s.length; i++){
+            
+            if(pairs.hasOwnProperty(s[i])){
+                stack.push(s[i])
+            } else if (pairs[stack[stack.length - 1]] == s[i]){
+                stack.pop()
+            } else {
+              return false
+            }
+        }
+
+        return stack.length == 0 ? true : false
+    }
+
+console.log(isValidd("{{"))
